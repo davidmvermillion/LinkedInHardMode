@@ -55,15 +55,30 @@ Violin <- grid.arrange(vp_vco, vp_ico, vp_cco, vp_v, vp_i, vp_c, nrow = 2)
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
-# Creating group
-dat_test <- data %>% 
-  gather("Stat", "Value")
 
-bp_vic <- ggplot(data, aes(x = Day, y = value, fill = category)) +
-  geom_bar(position = 'dodge', stat = 'identity')
-bp_vic
-# requires group for VIC first before can be used.
+# Tidy the data
+# https://stackoverflow.com/questions/70051541/how-do-i-adjust-my-tibble-to-get-a-grouped-bar-chart-in-ggplot2
+data1 <- data %>% 
+  pivot_longer(
+    cols = c(Views, Interactions, Comments),
+    names_to = "Section",
+    values_to = "values"
+  )
 
+# Full Comparison
+ggplot(data1, aes(x = Day, y = values, Fill = Section)) +
+  geom_bar(position = "dodge", stat = "identity")
+
+# Challenge Only
+co1 <- challengeonly %>% 
+  pivot_longer(
+    cols = c(Views, Interactions, Comments),
+    names_to = "Section",
+    values_to = "values"
+  )
+
+ggplot(co1, aes(x = Day, y = values, Fill = Section)) +
+  geom_bar(position = "dodge", stat = "identity")
 
 
 # Views
