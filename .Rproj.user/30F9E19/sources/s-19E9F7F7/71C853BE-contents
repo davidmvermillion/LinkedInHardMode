@@ -48,10 +48,11 @@ vp_cco <- ggplot(challengeonly, aes(Day, Interactions)) + geom_violin()
 vp_cco <- vp_cco + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
 
 # Put them together
+if(!require(gridExtra)) install.packages("gridExtra")
 library(gridExtra) # https://statsandr.com/blog/an-efficient-way-to-install-and-load-r-packages/
 Violin_VICCO <- grid.arrange(vp_vco, vp_ico, vp_cco, nrow = 1)
 Violin_VIC <- grid.arrange(vp_v, vp_i, vp_c, nrow = 1)
-Violt <- grid.arrange(vp_vco, vp_ico, vp_cco, vp_v, vp_i, vp_c, nrow = 2)
+Violin <- grid.arrange(vp_vco, vp_ico, vp_cco, vp_v, vp_i, vp_c, nrow = 2)
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
@@ -60,8 +61,28 @@ bp_vic <- ggplot(data, aes(x = Day, y = value, fill = column)) +
 bp_vic
 # requires group for VIC first before can be used.
 
+# Views
 bp_v <- ggplot(data, aes(x = Day, y = Views)) + geom_col()
 bp_v
+bp_vco <- ggplot(challengeonly, aes(x = Day, y = Views)) + geom_col()
+bp_vco
+
+# Interactions
+bp_i <- ggplot(data, aes(x = Day, y = Interactions)) + geom_col()
+bp_i
+bp_ico <- ggplot(challengeonly, aes(x = Day, y = Interactions)) + geom_col()
+bp_ico
+
+# Comments
+bp_c <- ggplot(data, aes(x = Day, y = Comments)) + geom_col()
+bp_c
+bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) + geom_col()
+bp_cco
+
+# Put them together
+column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrows = 1)
+column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrows = 1)
+column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrows = 2)
 
 
 # Compare Categories and Post Types ---------------------------------------
