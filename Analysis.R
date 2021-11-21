@@ -10,6 +10,7 @@ data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInHardMode/LinkedInPostPerform
 
 
 # Exploring weird read-in -------------------------------------------------
+# CSV mutated Day header
 summary(data)
 head(data)
 a <- data %>% select(contains("Day"))
@@ -51,9 +52,16 @@ library(gridExtra) # https://statsandr.com/blog/an-efficient-way-to-install-and-
 Violin_VICCO <- grid.arrange(vp_vco, vp_ico, vp_cco, nrow = 1)
 Violin_VIC <- grid.arrange(vp_v, vp_i, vp_c, nrow = 1)
 Violt <- grid.arrange(vp_vco, vp_ico, vp_cco, vp_v, vp_i, vp_c, nrow = 2)
+# Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
+bp_vic <- ggplot(data, aes(x = Day, y = value, fill = column)) +
+  geom_bar(position = 'dodge', stat = 'identity')
+bp_vic
+# requires group for VIC first before can be used.
 
+bp_v <- ggplot(data, aes(x = Day, y = Views)) + geom_col()
+bp_v
 
 
 # Compare Categories and Post Types ---------------------------------------
