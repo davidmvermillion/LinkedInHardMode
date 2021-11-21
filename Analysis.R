@@ -3,7 +3,7 @@
 library('tidyverse')
 
 # Load data into Tibble
-data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInHardMode/LinkedInPostPerformancesDay25.csv")
+data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInPostPerformancesDay25.csv")
 # Correct to most recent file before running script
 
 # Exploring weird read-in
@@ -13,7 +13,6 @@ data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInHardMode/LinkedInPostPerform
 # CSV mutated Day header
 summary(data)
 head(data)
-a <- data %>% select(contains("Day"))
 
 # Corrected Day column ----
 data <- rename(data, Day = ï..Day)
