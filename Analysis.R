@@ -83,11 +83,17 @@ vic_co1 <- ggplot(co1, aes(x = Day, y = values, Fill = Section)) +
 vic_co1
 
 # Challenge only category
-co_2 <- arrange(co1, values, Category)
+co_2 <- arrange(co1, values, Category) # Doesn't show on chart
+# Works to factor order manually
+level_order <- c("Data", "SpaceNews", "USSFExplained", "Publishing", 
+                 "Nostalgia", "SpaceForce", "Update", "Office", "Space", "Military")
 
-cat_co <- ggplot(co_2, aes(x = Category, y = values, Fill = Section)) +
+cat_co <- ggplot(co_2, aes(x = factor(Category, level = level_order), y = values, Fill = Section)) +
   geom_bar(position = "dodge", stat = "identity")
 cat_co
+
+
+
 
 # Combined
 vicc <- grid.arrange(vic1, vic_co1, cat_co, nrow = 3)
