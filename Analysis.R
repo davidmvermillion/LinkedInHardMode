@@ -98,9 +98,10 @@ vicc
 
 
 # Views
-bp_v <- ggplot(data, aes(x = Day, y = Views)) + geom_col()
+# Tidied this section, but not the next ones
+bp_v <- ggplot(data1, aes(x = Day, y = values)) + geom_col()
 bp_v
-bp_vco <- ggplot(challengeonly, aes(x = Day, y = Views)) + geom_col()
+bp_vco <- ggplot(co1, aes(x = Day, y = values)) + geom_col()
 bp_vco
 
 # Interactions
@@ -116,9 +117,9 @@ bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) + geom_col()
 bp_cco
 
 # Put them together
-column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrows = 1)
-column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrows = 1)
-column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrows = 2)
+column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrow = 3)
+column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrow = 1)
+column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrow = 2)
 
 
 # Compare Categories and Post Types ---------------------------------------
