@@ -55,10 +55,16 @@ Violin <- grid.arrange(vp_vco, vp_ico, vp_cco, vp_v, vp_i, vp_c, nrow = 2)
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
-bp_vic <- ggplot(data, aes(x = Day, y = value, fill = column)) +
+# Creating group
+dat_test <- data %>% 
+  gather("Stat", "Value")
+
+bp_vic <- ggplot(data, aes(x = Day, y = value, fill = category)) +
   geom_bar(position = 'dodge', stat = 'identity')
 bp_vic
 # requires group for VIC first before can be used.
+
+
 
 # Views
 bp_v <- ggplot(data, aes(x = Day, y = Views)) + geom_col()
@@ -86,4 +92,19 @@ column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrows = 2)
 
 # Compare Categories and Post Types ---------------------------------------
 
+# Currently includes three days of posts before challenge
 
+# Categories
+cat2 <- CategoryCount
+cat2$Category <- factor(cat2$Category, levels = cat2$Category[order(cat2$n, decreasing = FALSE)])
+cat <- ggplot(cat2, aes(n, Category)) + geom_bar(stat = "identity")
+cat
+
+# Types
+type2 <- TypeCount
+type2$Type <- factor(type2$Type, levels = type2$Type[order(type2$n, decreasing = FALSE)])
+type <- ggplot(type2, aes(n, Type)) + geom_bar(stat = "identity")
+type
+
+# Charts together
+ct <- grid.arrange(cat, type, nrow = 2)
