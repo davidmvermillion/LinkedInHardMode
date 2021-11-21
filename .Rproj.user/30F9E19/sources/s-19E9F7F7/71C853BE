@@ -3,7 +3,7 @@
     "path": "~/GitHub/LinkedInHardMode/LinkedInHardMode/Analysis.R",
     "project_path": "Analysis.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "72627108",
     "contents": "",
     "dirty": false,
     "created": 1637452377177.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "6,51",
-        "scrollLine": "0"
+        "cursorPosition": "29,28",
+        "scrollLine": "8"
     },
     "folds": "",
-    "lastKnownWriteTime": 1637454164,
+    "lastKnownWriteTime": 1637455254,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1637454164687,
+    "last_content_update": 1637455254916,
     "read_only": false,
     "read_only_alternatives": []
 }
