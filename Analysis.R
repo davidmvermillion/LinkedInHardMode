@@ -66,8 +66,9 @@ data1 <- data %>%
   )
 
 # Full Comparison
-ggplot(data1, aes(x = Day, y = values, Fill = Section)) +
+vic1 <-  ggplot(data1, aes(x = Day, y = values, Fill = Section)) +
   geom_bar(position = "dodge", stat = "identity")
+vic1
 
 # Challenge Only
 co1 <- challengeonly %>% 
@@ -77,8 +78,23 @@ co1 <- challengeonly %>%
     values_to = "values"
   )
 
-ggplot(co1, aes(x = Day, y = values, Fill = Section)) +
+vic_co1 <- ggplot(co1, aes(x = Day, y = values, Fill = Section)) +
   geom_bar(position = "dodge", stat = "identity")
+vic_co1
+
+# Challenge only category
+co_2 <- arrange(co1, values, Category)
+
+cat_co <- ggplot(co_2, aes(x = Category, y = values, Fill = Section)) +
+  geom_bar(position = "dodge", stat = "identity")
+cat_co
+
+# Combined
+vicc <- grid.arrange(vic1, vic_co1, cat_co, nrow = 3)
+vicc
+
+
+# Columns -----------------------------------------------------------------
 
 
 # Views
