@@ -3,7 +3,7 @@
 library('tidyverse')
 
 # Load data into Tibble
-data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInHardMode/LinkedInPostPerformancesDay25.csv")
+data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInPostPerformancesDay25.csv")
 # Correct to most recent file before running script
 
 # Exploring weird read-in
@@ -13,7 +13,6 @@ data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInHardMode/LinkedInPostPerform
 # CSV mutated Day header
 summary(data)
 head(data)
-a <- data %>% select(contains("Day"))
 
 # Corrected Day column ----
 data <- rename(data, Day = ï..Day)
@@ -56,10 +55,47 @@ Violin <- grid.arrange(vp_vco, vp_ico, vp_cco, vp_v, vp_i, vp_c, nrow = 2)
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
-bp_vic <- ggplot(data, aes(x = Day, y = value, fill = column)) +
-  geom_bar(position = 'dodge', stat = 'identity')
-bp_vic
-# requires group for VIC first before can be used.
+
+# Tidy the data
+# https://stackoverflow.com/questions/70051541/how-do-i-adjust-my-tibble-to-get-a-grouped-bar-chart-in-ggplot2
+data1 <- data %>% 
+  pivot_longer(
+    cols = c(Views, Interactions, Comments),
+    names_to = "Section",
+    values_to = "values"
+  )
+
+# Full Comparison
+vic1 <-  ggplot(data1, aes(x = Day, y = values, Fill = Section)) +
+  geom_bar(position = "dodge", stat = "identity")
+vic1
+
+# Challenge Only
+co1 <- challengeonly %>% 
+  pivot_longer(
+    cols = c(Views, Interactions, Comments),
+    names_to = "Section",
+    values_to = "values"
+  )
+
+vic_co1 <- ggplot(co1, aes(x = Day, y = values, Fill = Section)) +
+  geom_bar(position = "dodge", stat = "identity")
+vic_co1
+
+# Challenge only category
+co_2 <- arrange(co1, values, Category)
+
+cat_co <- ggplot(co_2, aes(x = Category, y = values, Fill = Section)) +
+  geom_bar(position = "dodge", stat = "identity")
+cat_co
+
+# Combined
+vicc <- grid.arrange(vic1, vic_co1, cat_co, nrow = 3)
+vicc
+
+
+# Columns -----------------------------------------------------------------
+
 
 # Views
 bp_v <- ggplot(data, aes(x = Day, y = Views)) + geom_col()
@@ -87,4 +123,19 @@ column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrows = 2)
 
 # Compare Categories and Post Types ---------------------------------------
 
+# Currently includes three days of posts before challenge
 
+# Categories
+cat2 <- CategoryCount
+cat2$Category <- factor(cat2$Category, levels = cat2$Category[order(cat2$n, decreasing = FALSE)])
+cat <- ggplot(cat2, aes(n, Category)) + geom_bar(stat = "identity")
+cat
+
+# Types
+type2 <- TypeCount
+type2$Type <- factor(type2$Type, levels = type2$Type[order(type2$n, decreasing = FALSE)])
+type <- ggplot(type2, aes(n, Type)) + geom_bar(stat = "identity")
+type
+
+# Charts together
+ct <- grid.arrange(cat, type, nrow = 2)
