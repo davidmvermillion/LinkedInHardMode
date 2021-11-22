@@ -29,29 +29,171 @@ challengeonly <- filter(data, Day > 0)
 
 # Violin plot Views, Interactions, and Comments ----
 # Views
-vp_v <- ggplot(data, aes(Day, Views)) + geom_violin()
-vp_v
-vp_vco <- ggplot(challengeonly, aes(Day, Views)) + geom_violin()
-vp_vco <- vp_vco + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+vp_vy <- data %>% #y
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("View \nDistribution") +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vy
+
+vp_vt <- data %>% #title
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("View Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vt
+
+vp_vcoy <- challengeonly %>% #y
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("View \nDistribution") +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vcoy
+
+vp_vcot <- challengeonly %>% #title
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("View Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vcot
+
 
 # Interactions
-vp_i <- ggplot(data, aes(Day, Interactions)) + geom_violin()
-vp_i
-vp_ico <- ggplot(challengeonly, aes(Day, Interactions)) + geom_violin()
-vp_ico <- vp_ico + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+vp_iy <- data %>% #y
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("Interaction \nDistribution") +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_iy
+
+vp_it <- data %>% #title
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Interaction Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_it
+
+vp_icoy <- challengeonly %>% #y
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("Interaction \nDistribution") +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_icoy
+
+vp_icot <- challengeonly %>% #title
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Interaction Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_icot
 
 # Comments
-vp_c <- ggplot(data, aes(Day, Comments)) + geom_violin()
-vp_c
-vp_cco <- ggplot(challengeonly, aes(Day, Interactions)) + geom_violin()
-vp_cco <- vp_cco + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+vp_cy <- data %>% #y
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("Comment \nDistribution") +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_cy
+
+vp_ct <- data %>% #title
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Comment Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_ct
+
+vp_ccoy <- challengeonly %>% #y
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("Comment \nDistribution") +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_ccoy
+
+vp_ccot <- challengeonly %>% #title
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Comment Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_ccot
+
 
 # Put them together
 if(!require(gridExtra)) install.packages("gridExtra")
 library(gridExtra) # https://statsandr.com/blog/an-efficient-way-to-install-and-load-r-packages/
-Violin_VICCO <- grid.arrange(vp_vco, vp_ico, vp_cco, nrow = 1)
-Violin_VIC <- grid.arrange(vp_v, vp_i, vp_c, nrow = 1)
-Violin <- grid.arrange(vp_vco, vp_ico, vp_cco, vp_v, vp_i, vp_c, nrow = 2)
+if(!require(grid)) install.packages("grid")
+library(grid)
+
+Violin_VICCO <- grid.arrange(vp_vcoy, vp_icoy, vp_ccoy, nrow = 3)
+Violin_VIC <- grid.arrange(vp_vt, vp_it, vp_ct, nrow = 1)
+Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2,
+                       bottom = textGrob("Challenge Distributions \nOutlier Included on Bottom",
+                                      gp = gpar(fontsize = 20, col = "grey35")))
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
@@ -83,11 +225,17 @@ vic_co1 <- ggplot(co1, aes(x = Day, y = values, Fill = Section)) +
 vic_co1
 
 # Challenge only category
-co_2 <- arrange(co1, values, Category)
+co_2 <- arrange(co1, values, Category) # Doesn't show on chart
+# Works to factor order manually
+level_order <- c("Data", "SpaceNews", "USSFExplained", "Publishing", 
+                 "Nostalgia", "SpaceForce", "Update", "Office", "Space", "Military")
 
-cat_co <- ggplot(co_2, aes(x = Category, y = values, Fill = Section)) +
+cat_co <- ggplot(co_2, aes(x = factor(Category, level = level_order), y = values, Fill = Section)) +
   geom_bar(position = "dodge", stat = "identity")
 cat_co
+
+
+
 
 # Combined
 vicc <- grid.arrange(vic1, vic_co1, cat_co, nrow = 3)
@@ -98,9 +246,10 @@ vicc
 
 
 # Views
-bp_v <- ggplot(data, aes(x = Day, y = Views)) + geom_col()
+# Tidied this section, but not the next ones
+bp_v <- ggplot(data1, aes(x = Day, y = values)) + geom_col()
 bp_v
-bp_vco <- ggplot(challengeonly, aes(x = Day, y = Views)) + geom_col()
+bp_vco <- ggplot(co1, aes(x = Day, y = values)) + geom_col()
 bp_vco
 
 # Interactions
@@ -116,9 +265,9 @@ bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) + geom_col()
 bp_cco
 
 # Put them together
-column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrows = 1)
-column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrows = 1)
-column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrows = 2)
+column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrow = 3)
+column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrow = 1)
+column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrow = 2)
 
 
 # Compare Categories and Post Types ---------------------------------------
