@@ -29,7 +29,7 @@ challengeonly <- filter(data, Day > 0)
 
 # Violin plot Views, Interactions, and Comments ----
 # Views
-vp_v <- data %>% 
+vp_vy <- data %>% #y
   ggplot(aes(Day, Views)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
@@ -39,9 +39,22 @@ vp_v <- data %>%
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
-vp_v
+vp_vy
 
-vp_vco <- challengeonly %>% 
+vp_vt <- data %>% #title
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("View Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vt
+
+vp_vcoy <- challengeonly %>% #y
   ggplot(aes(Day, Views)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
@@ -51,11 +64,24 @@ vp_vco <- challengeonly %>%
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
-vp_vco
+vp_vcoy
+
+vp_vcot <- challengeonly %>% #title
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("View Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vcot
 
 
 # Interactions
-vp_i <- data %>% 
+vp_iy <- data %>% #y
   ggplot(aes(Day, Interactions)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
@@ -65,9 +91,22 @@ vp_i <- data %>%
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
-vp_i
+vp_iy
 
-vp_ico <- challengeonly %>% 
+vp_it <- data %>% #title
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Interaction Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_it
+
+vp_icoy <- challengeonly %>% #y
   ggplot(aes(Day, Interactions)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
@@ -77,10 +116,23 @@ vp_ico <- challengeonly %>%
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
-vp_ico
+vp_icoy
+
+vp_icot <- challengeonly %>% #title
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Interaction Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_icot
 
 # Comments
-vp_c <- data %>% 
+vp_cy <- data %>% #y
   ggplot(aes(Day, Comments)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
@@ -90,9 +142,22 @@ vp_c <- data %>%
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
-vp_c
+vp_cy
 
-vp_cco <- challengeonly %>% 
+vp_ct <- data %>% #title
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Comment Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_ct
+
+vp_ccoy <- challengeonly %>% #y
   ggplot(aes(Day, Comments)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
@@ -102,15 +167,28 @@ vp_cco <- challengeonly %>%
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
-vp_cco
+vp_ccoy
+
+vp_ccot <- challengeonly %>% #title
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Comment Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_ccot
 
 
 # Put them together
 if(!require(gridExtra)) install.packages("gridExtra")
 library(gridExtra) # https://statsandr.com/blog/an-efficient-way-to-install-and-load-r-packages/
-Violin_VICCO <- grid.arrange(vp_vco, vp_ico, vp_cco, nrow = 1)
-Violin_VIC <- grid.arrange(vp_v, vp_i, vp_c, nrow = 1)
-Violin <- grid.arrange(vp_vco, vp_ico, vp_cco, vp_v, vp_i, vp_c, nrow = 2)
+Violin_VICCO <- grid.arrange(vp_vcoy, vp_icoy, vp_ccoy, nrow = 3)
+Violin_VIC <- grid.arrange(vp_vt, vp_it, vp_ct, nrow = 1)
+Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2)
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
