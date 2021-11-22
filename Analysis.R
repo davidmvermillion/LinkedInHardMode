@@ -34,11 +34,9 @@ vp_v <- data %>%
   geom_violin(fill = "gray80") +
   theme_minimal() +
   ylab("View \nDistribution") +
-  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  # Quantile doesn't work to overlay in this manner
-  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
 vp_v
@@ -48,11 +46,9 @@ vp_vco <- challengeonly %>%
   geom_violin(fill = "gray80") +
   theme_minimal() +
   ylab("View \nDistribution") +
-  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  # Quantile doesn't work to overlay in this manner
-  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
 vp_vco
@@ -64,11 +60,9 @@ vp_i <- data %>%
   geom_violin(fill = "gray80") +
   theme_minimal() +
   ylab("Interaction \nDistribution") +
-  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  # Quantile doesn't work to overlay in this manner
-  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
 vp_i
@@ -78,11 +72,9 @@ vp_ico <- challengeonly %>%
   geom_violin(fill = "gray80") +
   theme_minimal() +
   ylab("Interaction \nDistribution") +
-  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  # Quantile doesn't work to overlay in this manner
-  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
 vp_ico
@@ -93,11 +85,9 @@ vp_c <- data %>%
   geom_violin(fill = "gray80") +
   theme_minimal() +
   ylab("Comment \nDistribution") +
-  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  # Quantile doesn't work to overlay in this manner
-  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
 vp_c
@@ -107,11 +97,9 @@ vp_cco <- challengeonly %>%
   geom_violin(fill = "gray80") +
   theme_minimal() +
   ylab("Comment \nDistribution") +
-  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
-  # Quantile doesn't work to overlay in this manner
-  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
         axis.ticks = element_blank(),
         axis.text.x = element_blank())
 vp_cco
