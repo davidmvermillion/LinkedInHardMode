@@ -5,10 +5,11 @@ vp_v <- data %>%
   ggplot(aes(Day, Views)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
-  ylab("View \n Counts") +
+  ggtitle("View Counts") +
+  #ylab("View \n Counts") +
   # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
   # Quantile doesn't work to overlay in this manner
-  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+  theme(axis.title.y = element_blank(),
         axis.title.x = element_blank(),
         plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
         axis.ticks = element_blank(),
