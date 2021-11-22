@@ -249,23 +249,55 @@ vicc
 # Tidied this section, but not the next ones
 bp_v <- ggplot(data1, aes(x = Day, y = values)) + geom_col()
 bp_v
-bp_vco <- ggplot(co1, aes(x = Day, y = values)) + geom_col()
+bp_vco <- ggplot(co1, aes(x = Day, y = values)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("View Counts") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+  )
 bp_vco
 
 # Interactions
 bp_i <- ggplot(data, aes(x = Day, y = Interactions)) + geom_col()
 bp_i
-bp_ico <- ggplot(challengeonly, aes(x = Day, y = Interactions)) + geom_col()
+bp_ico <- ggplot(challengeonly, aes(x = Day, y = Interactions)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("Interaction Counts") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+  )
 bp_ico
 
 # Comments
 bp_c <- ggplot(data, aes(x = Day, y = Comments)) + geom_col()
 bp_c
-bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) + geom_col()
+bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("Comment Counts") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+  )
 bp_cco
 
 # Put them together
-column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrow = 3)
+column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrow = 1,
+                             bottom = textGrob("Challenge Views, Interactions, and Comments had Cyclical Patterns",
+                                               gp = gpar(fontsize = 20, col = "grey35")))
 column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrow = 1)
 column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrow = 2)
 
