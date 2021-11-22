@@ -186,9 +186,14 @@ vp_ccot
 # Put them together
 if(!require(gridExtra)) install.packages("gridExtra")
 library(gridExtra) # https://statsandr.com/blog/an-efficient-way-to-install-and-load-r-packages/
+if(!require(grid)) install.packages("grid")
+library(grid)
+
 Violin_VICCO <- grid.arrange(vp_vcoy, vp_icoy, vp_ccoy, nrow = 3)
 Violin_VIC <- grid.arrange(vp_vt, vp_it, vp_ct, nrow = 1)
-Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2)
+Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2,
+                       bottom = textGrob("Challenge Distributions \nOutlier Included on Bottom",
+                                      gp = gpar(fontsize = 20, col = "grey35")))
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
