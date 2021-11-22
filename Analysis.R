@@ -252,7 +252,7 @@ bp_v
 bp_vco <- ggplot(co1, aes(x = Day, y = values)) +
   geom_col() +
   theme_minimal() +
-  ggtitle("View Counts per Challenge Day") +
+  ggtitle("View Counts") +
   theme(
     axis.title.y = element_blank(),
     plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
@@ -268,7 +268,7 @@ bp_i
 bp_ico <- ggplot(challengeonly, aes(x = Day, y = Interactions)) +
   geom_col() +
   theme_minimal() +
-  ggtitle("Interaction Counts per Challenge Day") +
+  ggtitle("Interaction Counts") +
   theme(
     axis.title.y = element_blank(),
     plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
@@ -284,7 +284,7 @@ bp_c
 bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) +
   geom_col() +
   theme_minimal() +
-  ggtitle("Comment Counts per Challenge Day") +
+  ggtitle("Comment Counts") +
   theme(
     axis.title.y = element_blank(),
     plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
