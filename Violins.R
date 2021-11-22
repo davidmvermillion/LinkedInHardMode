@@ -17,7 +17,28 @@ vp_v <- data %>%
 vp_v
 
 
+# Views
+vp_vy <- data %>% #y
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("View \nDistribution") +
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20, color = "grey55"),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vy
 
-# Not worked on yet
-vp_vco <- ggplot(challengeonly, aes(Day, Views)) + geom_violin()
-vp_vco <- vp_vco + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+vp_vt <- data %>% #title
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("View Distribution") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vt
