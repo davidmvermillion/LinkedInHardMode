@@ -29,22 +29,93 @@ challengeonly <- filter(data, Day > 0)
 
 # Violin plot Views, Interactions, and Comments ----
 # Views
-vp_v <- ggplot(data, aes(Day, Views)) + geom_violin()
+vp_v <- data %>% 
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("View \nDistribution") +
+  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # Quantile doesn't work to overlay in this manner
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
 vp_v
-vp_vco <- ggplot(challengeonly, aes(Day, Views)) + geom_violin()
-vp_vco <- vp_vco + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+
+vp_vco <- challengeonly %>% 
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("View \nDistribution") +
+  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # Quantile doesn't work to overlay in this manner
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_vco
+
 
 # Interactions
-vp_i <- ggplot(data, aes(Day, Interactions)) + geom_violin()
+vp_i <- data %>% 
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("Interaction \nDistribution") +
+  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # Quantile doesn't work to overlay in this manner
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
 vp_i
-vp_ico <- ggplot(challengeonly, aes(Day, Interactions)) + geom_violin()
-vp_ico <- vp_ico + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+
+vp_ico <- challengeonly %>% 
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("Interaction \nDistribution") +
+  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # Quantile doesn't work to overlay in this manner
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_ico
 
 # Comments
-vp_c <- ggplot(data, aes(Day, Comments)) + geom_violin()
+vp_c <- data %>% 
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("Comment \nDistribution") +
+  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # Quantile doesn't work to overlay in this manner
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
 vp_c
-vp_cco <- ggplot(challengeonly, aes(Day, Interactions)) + geom_violin()
-vp_cco <- vp_cco + geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+
+vp_cco <- challengeonly %>% 
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ylab("Comment \nDistribution") +
+  # geom_violin(draw_quantiles = c(0.25, 0.5, 0.75)) +
+  # Quantile doesn't work to overlay in this manner
+  theme(axis.title.y = element_text(angle = 0, vjust = 0, size = 20),
+        axis.title.x = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank())
+vp_cco
+
 
 # Put them together
 if(!require(gridExtra)) install.packages("gridExtra")
