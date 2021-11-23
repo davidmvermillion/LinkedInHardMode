@@ -50,9 +50,9 @@ vp_vt <- data %>% #title
   ggplot(aes(Day, Views)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
-  ggtitle("View Distribution") +
+  # ggtitle("View Distribution") +
   theme(axis.title.y = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
@@ -125,9 +125,9 @@ vp_it <- data %>% #title
   ggplot(aes(Day, Interactions)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
-  ggtitle("Interaction Distribution") +
+  # ggtitle("Interaction Distribution") +
   theme(axis.title.y = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
@@ -199,9 +199,9 @@ vp_ct <- data %>% #title
   ggplot(aes(Day, Comments)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
-  ggtitle("Comment Distribution") +
+  # ggtitle("Comment Distribution") +
   theme(axis.title.y = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
@@ -266,8 +266,8 @@ Violin_VICCOT <- grid.arrange(vp_vcott, vp_icott, vp_ccott, nrow = 1,
                                       gp = gpar(fontsize = 20, col = "grey35")))
 Violin_VIC <- grid.arrange(vp_vt, vp_it, vp_ct, nrow = 1)
 Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2,
-                       bottom = textGrob("Challenge Distributions \nOutlier Included on Bottom",
-                                      gp = gpar(fontsize = 20, col = "grey35")))
+                       top = textGrob("Challenge Distributions, Outlier Included on Bottom",
+                                      gp = gpar(fontsize = 20, col = "grey45")))
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
@@ -561,7 +561,7 @@ ct2 <- grid.arrange(cat4, type4, nrow = 2)
 
 # Violins
 Violin_VICCOT
-violin
+Violin
 
 # Bars
 vic1
