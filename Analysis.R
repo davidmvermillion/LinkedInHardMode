@@ -38,7 +38,9 @@ vp_vy <- data %>% #y
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_vy
 
 vp_vt <- data %>% #title
@@ -51,7 +53,9 @@ vp_vt <- data %>% #title
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_vt
 
 vp_vcoy <- challengeonly %>% #y
@@ -63,7 +67,9 @@ vp_vcoy <- challengeonly %>% #y
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_vcoy
 
 vp_vcot <- challengeonly %>% #title
@@ -76,8 +82,25 @@ vp_vcot <- challengeonly %>% #title
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_vcot
+
+vp_vcott <- challengeonly %>% #title
+  ggplot(aes(Day, Views)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Views") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
+vp_vcott
 
 
 # Interactions
@@ -90,7 +113,9 @@ vp_iy <- data %>% #y
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_iy
 
 vp_it <- data %>% #title
@@ -103,7 +128,9 @@ vp_it <- data %>% #title
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_it
 
 vp_icoy <- challengeonly %>% #y
@@ -115,7 +142,9 @@ vp_icoy <- challengeonly %>% #y
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_icoy
 
 vp_icot <- challengeonly %>% #title
@@ -128,8 +157,25 @@ vp_icot <- challengeonly %>% #title
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_icot
+
+vp_icott <- challengeonly %>% #title
+  ggplot(aes(Day, Interactions)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Interactions") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
+vp_icott
 
 # Comments
 vp_cy <- data %>% #y
@@ -141,7 +187,9 @@ vp_cy <- data %>% #y
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_cy
 
 vp_ct <- data %>% #title
@@ -154,7 +202,9 @@ vp_ct <- data %>% #title
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_ct
 
 vp_ccoy <- challengeonly %>% #y
@@ -166,7 +216,9 @@ vp_ccoy <- challengeonly %>% #y
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_ccoy
 
 vp_ccot <- challengeonly %>% #title
@@ -179,9 +231,25 @@ vp_ccot <- challengeonly %>% #title
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
 vp_ccot
 
+vp_ccott <- challengeonly %>% #title
+  ggplot(aes(Day, Comments)) +
+  geom_violin(fill = "gray80") +
+  theme_minimal() +
+  ggtitle("Comments") +
+  theme(axis.title.y = element_blank(),
+        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        axis.text.y = element_text(size = 12),
+        axis.title.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank())
+vp_ccott
 
 # Put them together
 if(!require(gridExtra)) install.packages("gridExtra")
@@ -189,7 +257,10 @@ library(gridExtra) # https://statsandr.com/blog/an-efficient-way-to-install-and-
 if(!require(grid)) install.packages("grid")
 library(grid)
 
-Violin_VICCO <- grid.arrange(vp_vcoy, vp_icoy, vp_ccoy, nrow = 3)
+Violin_VICCOY <- grid.arrange(vp_vcoy, vp_icoy, vp_ccoy, nrow = 3)
+Violin_VICCOT <- grid.arrange(vp_vcott, vp_icott, vp_ccott, nrow = 1, 
+                              bottom = textGrob("Challenge Distributions",
+                                      gp = gpar(fontsize = 20, col = "grey35")))
 Violin_VIC <- grid.arrange(vp_vt, vp_it, vp_ct, nrow = 1)
 Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2,
                        bottom = textGrob("Challenge Distributions \nOutlier Included on Bottom",
@@ -212,7 +283,7 @@ vic1 <-  ggplot(data1, aes(x = Day, y = values, Fill = Section)) +
   geom_bar(position = "dodge", stat = "identity")
 vic1
 
-# Challenge Only
+# Challenge Only Wave Pattern
 co1 <- challengeonly %>% 
   pivot_longer(
     cols = c(Views, Interactions, Comments),
@@ -221,7 +292,19 @@ co1 <- challengeonly %>%
   )
 
 vic_co1 <- ggplot(co1, aes(x = Day, y = values, Fill = Section)) +
-  geom_bar(position = "dodge", stat = "identity")
+  geom_bar(position = "dodge", stat = "identity") +
+  theme_minimal() +
+  ggtitle("Views Dwarfed Likes and Comments", subtitle = "Views Showed a Wavelike Cyclical Pattern") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    plot.subtitle = element_text(hjust = 0.5, color = "grey55", size = 15),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
 vic_co1
 
 # Challenge only category
