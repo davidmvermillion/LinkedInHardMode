@@ -20,12 +20,15 @@ head(data)
 plot(data)
 
 # Create useful selections ----
+challengeonly <- filter(data, Day > 0)
 CategoryCount <- count(data, Category)
+CategoryCount2 <- count(challengeonly, Category)
 TypeCount <- count(data, Type)
+TypeCount2 <- count(challengeonly, Type)
 InteractionsCount <- count(data, Interactions)
 CommentsCount <- count(data, Comments)
 VIC <- data %>% select(Views, Interactions, Comments)
-challengeonly <- filter(data, Day > 0)
+
 
 # Violin plot Views, Interactions, and Comments ----
 # Views
@@ -421,11 +424,62 @@ cat <- ggplot(cat2, aes(n, Category)) + geom_bar(stat = "identity") +
   )
 cat
 
+# Challenge only
+cat3 <- CategoryCount2
+cat3$Category <- factor(cat3$Category, levels = cat3$Category[order(cat3$n, decreasing = FALSE)])
+cat4 <- ggplot(cat3, aes(n, Category)) + geom_bar(stat = "identity") +
+  theme_minimal() +
+  ggtitle("I Posted to 9 Subcategories") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+  )
+cat4
+
 # Types
 type2 <- TypeCount
 type2$Type <- factor(type2$Type, levels = type2$Type[order(type2$n, decreasing = FALSE)])
-type <- ggplot(type2, aes(n, Type)) + geom_bar(stat = "identity")
+type <- ggplot(type2, aes(n, Type)) + geom_bar(stat = "identity") +
+  theme_minimal() +
+  ggtitle("Text Posts were Most Common") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    #plot.subtitle = element_text(hjust = 0.5, color = "grey55", size = 15),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+  )
 type
+
+# Challenge only
+type3 <- TypeCount2
+type3$Type <- factor(type3$Type, levels = type3$Type[order(type3$n, decreasing = FALSE)])
+type4 <- ggplot(type3, aes(n, Type)) + geom_bar(stat = "identity") +
+  theme_minimal() +
+  ggtitle("I Made More Text Posts than Photo Posts",
+          subtitle = "I Posted 1 Photo 3x More than 3 Photos") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    plot.subtitle = element_text(hjust = 0.5, color = "grey55", size = 15),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+  )
+type4
 
 # Charts together
 ct <- grid.arrange(cat, type, nrow = 2)
