@@ -406,7 +406,19 @@ column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrow = 2)
 # Categories
 cat2 <- CategoryCount
 cat2$Category <- factor(cat2$Category, levels = cat2$Category[order(cat2$n, decreasing = FALSE)])
-cat <- ggplot(cat2, aes(n, Category)) + geom_bar(stat = "identity")
+cat <- ggplot(cat2, aes(n, Category)) + geom_bar(stat = "identity") +
+  theme_minimal() +
+  ggtitle("I Posted to 10 Subcategories") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.minor.x = element_blank(),
+  )
 cat
 
 # Types
