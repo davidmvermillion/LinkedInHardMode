@@ -226,9 +226,13 @@ vic_co1
 
 # Challenge only category
 co_2 <- arrange(co1, values, Category) # Doesn't show on chart
-# Works to factor order manually
-level_order <- c("Data", "SpaceNews", "USSFExplained", "Publishing", 
-                 "Nostalgia", "SpaceForce", "Update", "Office", "Space", "Military")
+
+# https://stackoverflow.com/questions/70051541/how-do-i-adjust-my-tibble-to-get-a-grouped-bar-chart-in-ggplot2/70051880?noredirect=1#comment123848638_70051880
+level_order <- co_2 %>% 
+  filter(Section == "Views") %>% 
+  arrange(desc(values)) %>% 
+  pull(Category) %>% 
+  unique()
 
 cat_co <- ggplot(co_2, aes(x = factor(Category, level = level_order), y = values, Fill = Section)) +
   geom_bar(position = "dodge", stat = "identity")
