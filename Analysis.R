@@ -283,7 +283,18 @@ data1 <- data %>%
 
 # Full Comparison
 vic1 <-  ggplot(data1, aes(x = Day, y = values, Fill = Section)) +
-  geom_bar(position = "dodge", stat = "identity")
+  geom_bar(position = "dodge", stat = "identity") +
+  theme_minimal() +
+  ggtitle("Outlier Post was 3x Bigger than Closest Challenger") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
 vic1
 
 # Challenge Only Wave Pattern
@@ -347,59 +358,119 @@ vicc
 
 # Views
 # Tidied this section, but not the next ones
-bp_v <- ggplot(data1, aes(x = Day, y = values)) + geom_col()
+bp_v <- ggplot(data1, aes(x = Day, y = values)) + geom_col() +
+  geom_col() +
+  theme_minimal() +
+  # ggtitle("Views") +
+  theme(
+    axis.title.y = element_blank(),
+    # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
 bp_v
+
 bp_vco <- ggplot(co1, aes(x = Day, y = values)) +
   geom_col() +
   theme_minimal() +
-  ggtitle("View Counts") +
+  ggtitle("Views") +
   theme(
     axis.title.y = element_blank(),
     plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
     axis.text.y = element_text(size = 12),
     axis.text.x = element_text(size = 12),
     axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
   )
 bp_vco
 
 # Interactions
-bp_i <- ggplot(data, aes(x = Day, y = Interactions)) + geom_col()
+bp_i <- ggplot(data, aes(x = Day, y = Interactions)) + geom_col() +
+  geom_col() +
+  theme_minimal() +
+  # ggtitle("Interactions") +
+  theme(
+    axis.title.y = element_blank(),
+    # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
 bp_i
 bp_ico <- ggplot(challengeonly, aes(x = Day, y = Interactions)) +
   geom_col() +
   theme_minimal() +
-  ggtitle("Interaction Counts") +
+  ggtitle("Interactions") +
   theme(
     axis.title.y = element_blank(),
     plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
     axis.text.y = element_text(size = 12),
     axis.text.x = element_text(size = 12),
     axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
   )
 bp_ico
 
 # Comments
-bp_c <- ggplot(data, aes(x = Day, y = Comments)) + geom_col()
+bp_c <- ggplot(data, aes(x = Day, y = Comments)) + geom_col() +
+  geom_col() +
+  theme_minimal() +
+  # ggtitle("Comments") +
+  theme(
+    axis.title.y = element_blank(),
+    # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
 bp_c
 bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) +
   geom_col() +
   theme_minimal() +
-  ggtitle("Comment Counts") +
+  ggtitle("Comments") +
   theme(
     axis.title.y = element_blank(),
     plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
     axis.text.y = element_text(size = 12),
     axis.text.x = element_text(size = 12),
     axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
   )
 bp_cco
+
+bp_cco2 <- ggplot(challengeonly, aes(x = Day, y = Comments)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("Two Posts Generated Zero Comments") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
+bp_cco2
 
 # Put them together
 column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrow = 1,
                              bottom = textGrob("Challenge Views, Interactions, and Comments had Cyclical Patterns",
                                                gp = gpar(fontsize = 20, col = "grey35")))
 column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrow = 1)
-column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrow = 2)
+column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrow = 2,
+                       top = textGrob("All Metrics of Outlier Dwarf Challenge Performances",
+                                         gp = gpar(fontsize = 20, col = "grey35")))
 
 
 # Compare Categories and Post Types ---------------------------------------
@@ -483,3 +554,29 @@ type4
 
 # Charts together
 ct <- grid.arrange(cat, type, nrow = 2)
+ct2 <- grid.arrange(cat4, type4, nrow = 2)
+
+
+# Final Presentation Compilation------------------------------------------------
+
+# Violins
+Violin_VICCOT
+violin
+
+# Bars
+vic1
+vic_co1
+cat_co
+vicc
+bp_vco
+bp_ico
+bp_cco
+bp_cco2
+column_VICCO
+column
+cat
+cat4
+type
+type4
+ct
+ct2
