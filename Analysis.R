@@ -234,8 +234,18 @@ level_order <- co_2 %>%
   pull(Category) %>% 
   unique()
 
-cat_co <- ggplot(co_2, aes(x = factor(Category, level = level_order), y = values, Fill = Section)) +
-  geom_bar(position = "dodge", stat = "identity")
+cat_co <- ggplot(co_2, aes(y = factor(Category, level = level_order), x = values, Fill = Section)) +
+  geom_bar(position = "dodge", stat = "identity") +
+  theme_minimal() +
+  ggtitle("Post Categories Ranked by Impact") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.y = element_blank()
+    )
 cat_co
 
 
