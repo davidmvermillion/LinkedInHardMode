@@ -13,7 +13,10 @@ vp_v <- data %>%
         axis.title.x = element_blank(),
         plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
         axis.ticks = element_blank(),
-        axis.text.x = element_blank())
+        axis.text.x = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank()
+        )
 vp_v
 
 
