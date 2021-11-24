@@ -262,12 +262,12 @@ library(grid)
 
 Violin_VICCOY <- grid.arrange(vp_vcoy, vp_icoy, vp_ccoy, nrow = 3)
 Violin_VICCOT <- grid.arrange(vp_vcott, vp_icott, vp_ccott, nrow = 1, 
-                              bottom = textGrob("Challenge Distributions",
-                                      gp = gpar(fontsize = 20, col = "grey35")))
+                              top = textGrob("Challenge Distributions",
+                                      gp = gpar(fontsize = 30, col = "grey45")))
 Violin_VIC <- grid.arrange(vp_vt, vp_it, vp_ct, nrow = 1)
 Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2,
                        top = textGrob("Challenge Distributions, Outlier Included on Bottom",
-                                      gp = gpar(fontsize = 20, col = "grey45")))
+                                      gp = gpar(fontsize = 28, col = "grey45")))
 # Once ready, create proper presentation template
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
@@ -465,12 +465,12 @@ bp_cco2
 
 # Put them together
 column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrow = 1,
-                             bottom = textGrob("Challenge Views, Interactions, and Comments had Cyclical Patterns",
-                                               gp = gpar(fontsize = 20, col = "grey35")))
+                             top = textGrob("Challenge Views, Interactions, and Comments had Cyclical Patterns",
+                                               gp = gpar(fontsize = 20, col = "grey45")))
 column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrow = 1)
 column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrow = 2,
-                       top = textGrob("All Metrics of Outlier Dwarf Challenge Performances",
-                                         gp = gpar(fontsize = 20, col = "grey35")))
+                       top = textGrob("All Outlier Metrics Dwarf Challenge Performances",
+                                         gp = gpar(fontsize = 28, col = "grey45")))
 
 
 # Compare Categories and Post Types ---------------------------------------
@@ -537,12 +537,11 @@ type3 <- TypeCount2
 type3$Type <- factor(type3$Type, levels = type3$Type[order(type3$n, decreasing = FALSE)])
 type4 <- ggplot(type3, aes(n, Type)) + geom_bar(stat = "identity") +
   theme_minimal() +
-  ggtitle("I Made More Text Posts than Photo Posts",
-          subtitle = "I Posted 1 Photo 3x More than 3 Photos") +
+  ggtitle("I Posted More Text than Photos") +
   theme(
     axis.title.y = element_blank(),
-    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
-    plot.subtitle = element_text(hjust = 0.5, color = "grey55", size = 15),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
+    # plot.subtitle = element_text(hjust = 0.5, color = "grey55", size = 15),
     axis.text.y = element_text(size = 12),
     axis.text.x = element_text(size = 12),
     axis.title.x = element_blank(),
@@ -570,7 +569,6 @@ cat_co
 vicc
 bp_vco
 bp_ico
-bp_cco
 bp_cco2
 column_VICCO
 column
