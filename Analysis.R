@@ -3,7 +3,7 @@
 library('tidyverse')
 
 # Load data into Tibble
-data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInPostPerformancesDay25.csv")
+data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInPostPerformancesDay29.csv")
 # Correct to most recent file before running script
 
 # Exploring weird read-in
@@ -50,9 +50,9 @@ vp_vt <- data %>% #title
   ggplot(aes(Day, Views)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
-  ggtitle("View Distribution") +
+  # ggtitle("View Distribution") +
   theme(axis.title.y = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
@@ -125,9 +125,9 @@ vp_it <- data %>% #title
   ggplot(aes(Day, Interactions)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
-  ggtitle("Interaction Distribution") +
+  # ggtitle("Interaction Distribution") +
   theme(axis.title.y = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
@@ -199,9 +199,9 @@ vp_ct <- data %>% #title
   ggplot(aes(Day, Comments)) +
   geom_violin(fill = "gray80") +
   theme_minimal() +
-  ggtitle("Comment Distribution") +
+  # ggtitle("Comment Distribution") +
   theme(axis.title.y = element_blank(),
-        plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+        # plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
         axis.text.y = element_text(size = 12),
         axis.title.x = element_blank(),
         axis.ticks = element_blank(),
@@ -262,13 +262,13 @@ library(grid)
 
 Violin_VICCOY <- grid.arrange(vp_vcoy, vp_icoy, vp_ccoy, nrow = 3)
 Violin_VICCOT <- grid.arrange(vp_vcott, vp_icott, vp_ccott, nrow = 1, 
-                              bottom = textGrob("Challenge Distributions",
-                                      gp = gpar(fontsize = 20, col = "grey35")))
+                              top = textGrob("Challenge Distributions",
+                                      gp = gpar(fontsize = 30, col = "grey45")))
 Violin_VIC <- grid.arrange(vp_vt, vp_it, vp_ct, nrow = 1)
 Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2,
-                       bottom = textGrob("Challenge Distributions \nOutlier Included on Bottom",
-                                      gp = gpar(fontsize = 20, col = "grey35")))
-# Once ready, create proper presentation template
+                       top = textGrob("Challenge Distributions, Outlier Included on Bottom",
+                                      gp = gpar(fontsize = 28, col = "grey45")))
+
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
 
@@ -403,6 +403,7 @@ bp_i <- ggplot(data, aes(x = Day, y = Interactions)) + geom_col() +
     panel.grid.minor.x = element_blank()
   )
 bp_i
+
 bp_ico <- ggplot(challengeonly, aes(x = Day, y = Interactions)) +
   geom_col() +
   theme_minimal() +
@@ -465,12 +466,12 @@ bp_cco2
 
 # Put them together
 column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrow = 1,
-                             bottom = textGrob("Challenge Views, Interactions, and Comments had Cyclical Patterns",
-                                               gp = gpar(fontsize = 20, col = "grey35")))
+                             top = textGrob("Challenge Views, Interactions, and Comments had Cyclical Patterns",
+                                               gp = gpar(fontsize = 20, col = "grey45")))
 column_VIC <- grid.arrange(bp_v, bp_i, bp_c, nrow = 1)
 column <- grid.arrange(bp_vco, bp_ico, bp_cco, bp_v, bp_i, bp_c, nrow = 2,
-                       top = textGrob("All Metrics of Outlier Dwarf Challenge Performances",
-                                         gp = gpar(fontsize = 20, col = "grey35")))
+                       top = textGrob("All Outlier Metrics Dwarf Challenge Performances",
+                                         gp = gpar(fontsize = 28, col = "grey45")))
 
 
 # Compare Categories and Post Types ---------------------------------------
@@ -537,12 +538,11 @@ type3 <- TypeCount2
 type3$Type <- factor(type3$Type, levels = type3$Type[order(type3$n, decreasing = FALSE)])
 type4 <- ggplot(type3, aes(n, Type)) + geom_bar(stat = "identity") +
   theme_minimal() +
-  ggtitle("I Made More Text Posts than Photo Posts",
-          subtitle = "I Posted 1 Photo 3x More than 3 Photos") +
+  ggtitle("I Posted More Text than Photos") +
   theme(
     axis.title.y = element_blank(),
-    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
-    plot.subtitle = element_text(hjust = 0.5, color = "grey55", size = 15),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 30),
+    # plot.subtitle = element_text(hjust = 0.5, color = "grey55", size = 15),
     axis.text.y = element_text(size = 12),
     axis.text.x = element_text(size = 12),
     axis.title.x = element_blank(),
@@ -561,22 +561,11 @@ ct2 <- grid.arrange(cat4, type4, nrow = 2)
 
 # Violins
 Violin_VICCOT
-violin
+
 
 # Bars
-vic1
-vic_co1
-cat_co
-vicc
-bp_vco
-bp_ico
-bp_cco
-bp_cco2
 column_VICCO
-column
-cat
-cat4
-type
+vic_co1
 type4
-ct
-ct2
+cat4
+vic1
