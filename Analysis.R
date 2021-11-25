@@ -268,7 +268,7 @@ Violin_VIC <- grid.arrange(vp_vt, vp_it, vp_ct, nrow = 1)
 Violin <- grid.arrange(vp_vcot, vp_icot, vp_ccot, vp_vt, vp_it, vp_ct, nrow = 2,
                        top = textGrob("Challenge Distributions, Outlier Included on Bottom",
                                       gp = gpar(fontsize = 28, col = "grey45")))
-# Once ready, create proper presentation template
+
 
 # Bar Graph Comparison of Views, Interactions, and Comments ---------------
 
@@ -403,6 +403,7 @@ bp_i <- ggplot(data, aes(x = Day, y = Interactions)) + geom_col() +
     panel.grid.minor.x = element_blank()
   )
 bp_i
+
 bp_ico <- ggplot(challengeonly, aes(x = Day, y = Interactions)) +
   geom_col() +
   theme_minimal() +
