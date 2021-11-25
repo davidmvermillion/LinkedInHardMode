@@ -3,7 +3,7 @@
 library('tidyverse')
 
 # Load data into Tibble
-data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInPostPerformancesDay25.csv")
+data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInPostPerformancesDay29.csv")
 # Correct to most recent file before running script
 
 # Exploring weird read-in
@@ -560,21 +560,11 @@ ct2 <- grid.arrange(cat4, type4, nrow = 2)
 
 # Violins
 Violin_VICCOT
-Violin
+
 
 # Bars
-vic1
-vic_co1
-cat_co
-vicc
-bp_vco
-bp_ico
-bp_cco2
 column_VICCO
-column
-cat
-cat4
-type
+vic_co1
 type4
-ct
-ct2
+cat4
+vic1
