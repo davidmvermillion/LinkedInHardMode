@@ -159,7 +159,7 @@ cat3 <- CategoryCount2
 cat3$Category <- factor(cat3$Category, levels = cat3$Category[order(cat3$n, decreasing = FALSE)])
 cat4 <- ggplot(cat3, aes(n, Category)) + geom_bar(stat = "identity") +
   theme_minimal() +
-  ggtitle("I Posted to 9 Subcategories") +
+  ggtitle("I Posted to 10 Subcategories") +
   theme(
     axis.title.y = element_blank(),
     plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
