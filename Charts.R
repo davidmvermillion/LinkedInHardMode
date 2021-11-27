@@ -191,3 +191,55 @@ type4 <- ggplot(type3, aes(n, Type)) + geom_bar(stat = "identity") +
     panel.grid.minor.x = element_blank(),
   )
 type4
+
+# Wave pattern
+
+bp_ico <- ggplot(challengeonly, aes(x = Day, y = Interactions)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("Interactions") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
+bp_ico
+
+bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("Comments") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
+bp_cco
+
+bp_vco <- ggplot(co1, aes(x = Day, y = values)) +
+  geom_col() +
+  theme_minimal() +
+  ggtitle("Views") +
+  theme(
+    axis.title.y = element_blank(),
+    plot.title = element_text(hjust = 0.5, color = "grey55", size = 20),
+    axis.text.y = element_text(size = 12),
+    axis.text.x = element_text(size = 12),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
+  )
+bp_vco
+
+
+column_VICCO <- grid.arrange(bp_vco, bp_ico, bp_cco, nrow = 1,
+                             top = textGrob("Challenge Views, Interactions, and Comments had Cyclical Patterns",
+                                            gp = gpar(fontsize = 20, col = "grey45")))

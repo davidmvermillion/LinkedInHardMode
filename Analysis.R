@@ -434,6 +434,7 @@ bp_c <- ggplot(data, aes(x = Day, y = Comments)) + geom_col() +
     panel.grid.minor.x = element_blank()
   )
 bp_c
+
 bp_cco <- ggplot(challengeonly, aes(x = Day, y = Comments)) +
   geom_col() +
   theme_minimal() +
