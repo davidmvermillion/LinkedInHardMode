@@ -3,7 +3,7 @@
 library('tidyverse')
 
 # Load data into Tibble
-data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInPostPerformancesDay29.csv")
+data <- read.csv("~/GitHub/LinkedInHardMode/LinkedInPostPerformancesDay30.csv")
 
 # Corrected Day column ----
 data <- rename(data, Day = ï..Day)
