@@ -63,7 +63,104 @@ theme_generic <- function(base_size = 12,
 
 # Sort Data ---------------------------------------------------------------
 
-posts %>% filter(Views < median(Views)) %>% 
-  filter(Date > "2022-01-01")
+duds <- posts %>% filter(Views < as.integer(quantile(posts$Views, .33))) %>% 
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+topperformers <- posts %>% filter(Views > as.integer(quantile(posts$Views, .66))) %>% 
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+greater1000 <- posts %>% filter(Views > 1000) %>% 
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+top3 <- posts %>% filter(Views > 3500) %>% 
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+video <- posts %>%  
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type == "Video") %>% 
+  select(-Votes)
+
+# Weekday comparisons
+
+three <- posts %>% filter(WeekdayNumber == 3) %>% 
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+four <- posts %>% filter(WeekdayNumber == 4) %>% 
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+five <- posts %>% filter(WeekdayNumber == 5) %>% 
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+three <- posts %>% filter(WeekdayNumber == 5) %>% 
+  filter(Date >= "2022-01-03") %>% 
+  filter(Date <= "2022-02-01") %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+Sunday <- posts %>% filter(WeekdayNumber == 1) %>% 
+  filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Video") %>% 
+  filter(Type != "Poll") %>% 
+  select(-Votes)
+
+Monday <- posts %>% filter(WeekdayNumber == 2) %>% 
+  filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+Tuesday <- posts %>% filter(WeekdayNumber == 3) %>% 
+  filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Video") %>% 
+  filter(Type != "Poll") %>% 
+  select(-Votes)
+
+Wednesday <- posts %>% filter(WeekdayNumber == 4) %>% 
+  filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+Thursday <- posts %>% filter(WeekdayNumber == 5) %>% 
+  filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+Friday <- posts %>% filter(WeekdayNumber == 6) %>% 
+  filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
+
+Saturday <- posts %>% filter(WeekdayNumber == 7) %>% 
+  filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Video") %>% 
+  select(-Votes)
 
 plot(posts$Views)
