@@ -59,7 +59,7 @@ theme_generic <- function(base_size = 12,
 
 # Show
   # Performance over thirty days
-    # Profile view history
+  # Profile view history
 
 
 
