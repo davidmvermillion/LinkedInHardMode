@@ -12,6 +12,8 @@ posts$Date <- as.Date(posts$Date)
 profileviews$Weekof <- as.Date(profileviews$Weekof)
 connections$Date <- as.Date(connections$Date)
 
+posts$Engagement <- (posts$Reactions + posts$Comments)/posts$Views
+
 # ggplot Theme ----
 theme_generic <- function(base_size = 12,
                           base_family = "",
@@ -51,6 +53,7 @@ theme_generic <- function(base_size = 12,
 #   Duds
 #   Top-Performers
 #   Videos
+#   Engagement
 
 # Find
 #   Which days performed best
