@@ -61,6 +61,9 @@ theme_generic <- function(base_size = 12,
   # Performance over thirty days
   # Profile view history
 
+# Sort Data ---------------------------------------------------------------
 
+posts %>% filter(Views < median(Views)) %>% 
+  filter(Date > "2022-01-01")
 
 plot(posts$Views)
