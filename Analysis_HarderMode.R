@@ -96,7 +96,7 @@ video <- posts %>%
   filter(Type == "Video") %>% 
   select(-Votes)
 
-# Weekday comparisons
+# Weekday comparisons ----
 
 three <- posts %>% filter(WeekdayNumber == 3) %>% 
   filter(Date >= "2022-01-03") %>% 
@@ -165,5 +165,22 @@ Saturday <- posts %>% filter(WeekdayNumber == 7) %>%
   filter(Day <= 100) %>% 
   filter(Type != "Video") %>% 
   select(-Votes)
+
+
+# Categories --------------------------------------------------------------
+
+catcount <- unique(posts$Category)
+typecount <- unique(posts$Type)
+
+
+# Visuals -----------------------------------------------------------------
+
+posts %>% filter(Day > 0) %>% 
+  ggplot(aes(x = Date, y = Reactions)) +
+  geom_point(color = "grey45") +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Reactions per Post Show\nSteady Increase")
+
 
 plot(posts$Views)
