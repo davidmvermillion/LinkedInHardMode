@@ -76,7 +76,8 @@ topperformers <- posts %>% filter(Views > as.integer(quantile(posts$Views, .66))
   filter(Date >= "2022-01-03") %>% 
   filter(Date <= "2022-02-01") %>% 
   filter(Type != "Video") %>% 
-  select(-Votes)
+  select(-Votes) %>% 
+  slice_head(n = 10)
 
 greater1000 <- posts %>% filter(Views > 1000) %>% 
   filter(Date >= "2022-01-03") %>% 
@@ -88,7 +89,8 @@ top3 <- posts %>% filter(Views > 3500) %>%
   filter(Date >= "2022-01-03") %>% 
   filter(Date <= "2022-02-01") %>% 
   filter(Type != "Video") %>% 
-  select(-Votes)
+  select(-Votes) %>% 
+  slice(1:3) # https://www.geeksforgeeks.org/select-top-n-highest-values-by-group-in-r/
 
 video <- posts %>%  
   filter(Date >= "2022-01-03") %>% 
@@ -97,30 +99,6 @@ video <- posts %>%
   select(-Votes)
 
 # Weekday comparisons ----
-
-three <- posts %>% filter(WeekdayNumber == 3) %>% 
-  filter(Date >= "2022-01-03") %>% 
-  filter(Date <= "2022-02-01") %>% 
-  filter(Type != "Video") %>% 
-  select(-Votes)
-
-four <- posts %>% filter(WeekdayNumber == 4) %>% 
-  filter(Date >= "2022-01-03") %>% 
-  filter(Date <= "2022-02-01") %>% 
-  filter(Type != "Video") %>% 
-  select(-Votes)
-
-five <- posts %>% filter(WeekdayNumber == 5) %>% 
-  filter(Date >= "2022-01-03") %>% 
-  filter(Date <= "2022-02-01") %>% 
-  filter(Type != "Video") %>% 
-  select(-Votes)
-
-three <- posts %>% filter(WeekdayNumber == 5) %>% 
-  filter(Date >= "2022-01-03") %>% 
-  filter(Date <= "2022-02-01") %>% 
-  filter(Type != "Video") %>% 
-  select(-Votes)
 
 Sunday <- posts %>% filter(WeekdayNumber == 1) %>% 
   filter(Day > 0) %>% 
@@ -172,16 +150,72 @@ Saturday <- posts %>% filter(WeekdayNumber == 7) %>%
 catcount <- unique(posts$Category)
 typecount <- unique(posts$Type)
 
+# Still need to compare types and categories
+
 
 # Visuals -----------------------------------------------------------------
 
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 100) %>% 
-  ggplot(aes(x = Date, y = Reactions)) +
-  geom_point(color = "grey45") +
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Reactions, color = Category)) +
+  geom_point() +
   geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
   theme_generic() +
   ggtitle("Reactions per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Views, color = Category)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Views per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Comments, color = Category)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Comments per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Reactions, color = Type)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Reactions per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Views, color = Type)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Views per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Comments, color = Type)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Comments per Post Show\nSteady Increase")
+
+
 
 
 plot(posts$Views)
