@@ -147,8 +147,68 @@ Saturday <- posts %>% filter(WeekdayNumber == 7) %>%
 
 # Categories --------------------------------------------------------------
 
-catcount <- unique(posts$Category)
-typecount <- unique(posts$Type)
+CDaysofTribute <- posts %>% 
+  filter(Category == "12DaysofTribute")
+
+CArtificial_Intelligence <- posts %>% 
+  filter(Category == "Artificial_Intelligence")
+
+CData <- posts %>% 
+  filter(Category == "Data")
+
+CHoliday <- posts %>% 
+  filter(Category == "Holiday")
+
+CLife <- posts %>% 
+  filter(Category == "Life")
+
+CNostalgia <- posts %>% 
+  filter(Category == "Nostalgia")
+
+COffice <- posts %>% 
+  filter(Category == "Office")
+
+CPhilosophy <- posts %>% 
+  filter(Category == "Philosophy")
+
+CPublishing <- posts %>% 
+  filter(Category == "Publishing")
+
+CSpace <- posts %>% 
+  filter(Category == "Space")
+
+CSpaceForce <- posts %>% 
+  filter(Category == "SpaceForce")
+
+CSpaceNews <- posts %>% 
+  filter(Category == "SpaceNews")
+
+CUpdate <- posts %>% 
+  filter(Category == "Update")
+
+CUSSFExplained <- posts %>% 
+  filter(Category == "USSFExplained")
+
+
+# Type --------------------------------------------------------------
+
+TDocument <- posts %>%
+  filter(Type == "Document")
+
+TLink <- posts %>%
+  filter(Type == "Link")
+
+TPhoto_1 <- posts %>%
+  filter(Type == "Photo_1")
+
+TPhoto_2 <- posts %>%
+  filter(Type == "Photo_2")
+
+TPhoto_3 <- posts %>%
+  filter(Type == "Photo_3")
+
+TText <- posts %>%
+  filter(Type == "Text")
 
 # Still need to compare types and categories
 
