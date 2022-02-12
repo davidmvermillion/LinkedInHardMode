@@ -3,7 +3,7 @@
 library(tidyverse)
 
 # Import ----
-posts <- read.csv("LinkedInPostPerformancesDay98.csv", fileEncoding = "UTF-8-BOM")
+posts <- read.csv("LinkedInPostPerformancesDay108.csv", fileEncoding = "UTF-8-BOM")
 profileviews <- read.csv("ProfileViews.csv", fileEncoding = "UTF-8-BOM")
 connections <- read.csv("ConnectionCountbyDate.csv", fileEncoding = "UTF-8-BOM")
 
@@ -176,6 +176,7 @@ typecount <- unique(posts$Type)
 # Visuals -----------------------------------------------------------------
 
 posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
   ggplot(aes(x = Date, y = Reactions)) +
   geom_point(color = "grey45") +
   geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
