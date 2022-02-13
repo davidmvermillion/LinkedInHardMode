@@ -153,6 +153,15 @@ CDaysofTribute <- posts %>%
 CArtificial_Intelligence <- posts %>% 
   filter(Category == "Artificial_Intelligence")
 
+CCelebration <- posts %>% 
+  filter(Category == "Celebration")
+
+CCoding <- posts %>% 
+  filter(Category == "Coding")
+
+CCyberSecurity <- posts %>% 
+  filter(Category == "CyberSecurity")
+
 CData <- posts %>% 
   filter(Category == "Data")
 
@@ -161,6 +170,9 @@ CHoliday <- posts %>%
 
 CLife <- posts %>% 
   filter(Category == "Life")
+
+CMath <- posts %>% 
+  filter(Category == "Math")
 
 CNostalgia <- posts %>% 
   filter(Category == "Nostalgia")
@@ -189,8 +201,32 @@ CUpdate <- posts %>%
 CUSSFExplained <- posts %>% 
   filter(Category == "USSFExplained")
 
+catlist <- (unique(posts$Category))
+
+# More work needed to streamline this process
+# This is for the entire data set
+CategoriesCompared <- (c(median(CSpaceForce$Views), median(CCyberSecurity$Views),
+                                  median(CCelebration$Views), median(CUpdate$Views), median(CSpaceNews$Views),
+                        median(CData$Views), median(CUSSFExplained$Views), median(CNostalgia$Views), median(CPublishing$Views),
+                        median(CHoliday$Views), median(COffice$Views), median(CSpace$Views),
+                        median(CArtificial_Intelligence$Views), median(CDaysofTribute$Views), median(CPhilosophy$Views),
+                        median(CLife$Views), median(CCoding$Views), median(CMath$Views)))
+
+cc <- as_tibble(cbind(catlist, CategoriesCompared))
+cc$CategoriesCompared <- as.numeric(cc$CategoriesCompared)
+cc$catlist <- as.character(cc$catlist)
+
+top3c <- cc %>% 
+  arrange(desc(CategoriesCompared)) %>% 
+  slice_head(n = 3)
+
+dud3c <- cc %>% 
+  arrange(desc(CategoriesCompared)) %>% 
+  slice_tail(n = 3)
 
 # Type --------------------------------------------------------------
+
+typelist <- (unique(posts$Type))
 
 TDocument <- posts %>%
   filter(Type == "Document")
@@ -209,6 +245,22 @@ TPhoto_3 <- posts %>%
 
 TText <- posts %>%
   filter(Type == "Text")
+
+TShare <- posts %>%
+  filter(Type == "Share")
+
+TLink <- posts %>%
+  filter(Type == "Link")
+
+TPoll <- posts %>%
+  filter(Type == "Poll")
+
+TVideo <- posts %>%
+  filter(Type == "Video")
+
+TypeCompared <- c(
+  
+)
 
 # Still need to compare types and categories
 
