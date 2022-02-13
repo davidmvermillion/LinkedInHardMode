@@ -76,7 +76,8 @@ topperformers <- posts %>% filter(Views > as.integer(quantile(posts$Views, .66))
   filter(Date >= "2022-01-03") %>% 
   filter(Date <= "2022-02-01") %>% 
   filter(Type != "Video") %>% 
-  select(-Votes)
+  select(-Votes) %>% 
+  slice_head(n = 10)
 
 greater1000 <- posts %>% filter(Views > 1000) %>% 
   filter(Date >= "2022-01-03") %>% 
@@ -88,7 +89,8 @@ top3 <- posts %>% filter(Views > 3500) %>%
   filter(Date >= "2022-01-03") %>% 
   filter(Date <= "2022-02-01") %>% 
   filter(Type != "Video") %>% 
-  select(-Votes)
+  select(-Votes) %>% 
+  slice(1:3) # https://www.geeksforgeeks.org/select-top-n-highest-values-by-group-in-r/
 
 video <- posts %>%  
   filter(Date >= "2022-01-03") %>% 
@@ -97,30 +99,6 @@ video <- posts %>%
   select(-Votes)
 
 # Weekday comparisons ----
-
-three <- posts %>% filter(WeekdayNumber == 3) %>% 
-  filter(Date >= "2022-01-03") %>% 
-  filter(Date <= "2022-02-01") %>% 
-  filter(Type != "Video") %>% 
-  select(-Votes)
-
-four <- posts %>% filter(WeekdayNumber == 4) %>% 
-  filter(Date >= "2022-01-03") %>% 
-  filter(Date <= "2022-02-01") %>% 
-  filter(Type != "Video") %>% 
-  select(-Votes)
-
-five <- posts %>% filter(WeekdayNumber == 5) %>% 
-  filter(Date >= "2022-01-03") %>% 
-  filter(Date <= "2022-02-01") %>% 
-  filter(Type != "Video") %>% 
-  select(-Votes)
-
-three <- posts %>% filter(WeekdayNumber == 5) %>% 
-  filter(Date >= "2022-01-03") %>% 
-  filter(Date <= "2022-02-01") %>% 
-  filter(Type != "Video") %>% 
-  select(-Votes)
 
 Sunday <- posts %>% filter(WeekdayNumber == 1) %>% 
   filter(Day > 0) %>% 
@@ -169,19 +147,187 @@ Saturday <- posts %>% filter(WeekdayNumber == 7) %>%
 
 # Categories --------------------------------------------------------------
 
-catcount <- unique(posts$Category)
-typecount <- unique(posts$Type)
+CDaysofTribute <- posts %>% 
+  filter(Category == "12DaysofTribute")
+
+CArtificial_Intelligence <- posts %>% 
+  filter(Category == "Artificial_Intelligence")
+
+CCelebration <- posts %>% 
+  filter(Category == "Celebration")
+
+CCoding <- posts %>% 
+  filter(Category == "Coding")
+
+CCyberSecurity <- posts %>% 
+  filter(Category == "CyberSecurity")
+
+CData <- posts %>% 
+  filter(Category == "Data")
+
+CHoliday <- posts %>% 
+  filter(Category == "Holiday")
+
+CLife <- posts %>% 
+  filter(Category == "Life")
+
+CMath <- posts %>% 
+  filter(Category == "Math")
+
+CNostalgia <- posts %>% 
+  filter(Category == "Nostalgia")
+
+COffice <- posts %>% 
+  filter(Category == "Office")
+
+CPhilosophy <- posts %>% 
+  filter(Category == "Philosophy")
+
+CPublishing <- posts %>% 
+  filter(Category == "Publishing")
+
+CSpace <- posts %>% 
+  filter(Category == "Space")
+
+CSpaceForce <- posts %>% 
+  filter(Category == "SpaceForce")
+
+CSpaceNews <- posts %>% 
+  filter(Category == "SpaceNews")
+
+CUpdate <- posts %>% 
+  filter(Category == "Update")
+
+CUSSFExplained <- posts %>% 
+  filter(Category == "USSFExplained")
+
+catlist <- (unique(posts$Category))
+
+# More work needed to streamline this process
+# This is for the entire data set
+CategoriesCompared <- (c(median(CSpaceForce$Views), median(CCyberSecurity$Views),
+                                  median(CCelebration$Views), median(CUpdate$Views), median(CSpaceNews$Views),
+                        median(CData$Views), median(CUSSFExplained$Views), median(CNostalgia$Views), median(CPublishing$Views),
+                        median(CHoliday$Views), median(COffice$Views), median(CSpace$Views),
+                        median(CArtificial_Intelligence$Views), median(CDaysofTribute$Views), median(CPhilosophy$Views),
+                        median(CLife$Views), median(CCoding$Views), median(CMath$Views)))
+
+cc <- as_tibble(cbind(catlist, CategoriesCompared))
+cc$CategoriesCompared <- as.numeric(cc$CategoriesCompared)
+cc$catlist <- as.character(cc$catlist)
+
+top3c <- cc %>% 
+  arrange(desc(CategoriesCompared)) %>% 
+  slice_head(n = 3)
+
+dud3c <- cc %>% 
+  arrange(desc(CategoriesCompared)) %>% 
+  slice_tail(n = 3)
+
+# Type --------------------------------------------------------------
+
+typelist <- (unique(posts$Type))
+
+TDocument <- posts %>%
+  filter(Type == "Document")
+
+TLink <- posts %>%
+  filter(Type == "Link")
+
+TPhoto_1 <- posts %>%
+  filter(Type == "Photo_1")
+
+TPhoto_2 <- posts %>%
+  filter(Type == "Photo_2")
+
+TPhoto_3 <- posts %>%
+  filter(Type == "Photo_3")
+
+TText <- posts %>%
+  filter(Type == "Text")
+
+TShare <- posts %>%
+  filter(Type == "Share")
+
+TLink <- posts %>%
+  filter(Type == "Link")
+
+TPoll <- posts %>%
+  filter(Type == "Poll")
+
+TVideo <- posts %>%
+  filter(Type == "Video")
+
+TypeCompared <- c(
+  
+)
+
+# Still need to compare types and categories
 
 
 # Visuals -----------------------------------------------------------------
 
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 100) %>% 
-  ggplot(aes(x = Date, y = Reactions)) +
-  geom_point(color = "grey45") +
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Reactions, color = Category)) +
+  geom_point() +
   geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
   theme_generic() +
   ggtitle("Reactions per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Views, color = Category)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Views per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Comments, color = Category)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Comments per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Reactions, color = Type)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Reactions per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Views, color = Type)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Views per Post Show\nSteady Increase")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Comments, color = Type)) +
+  geom_point() +
+  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  theme_generic() +
+  ggtitle("Comments per Post Show\nSteady Increase")
+
+
 
 
 plot(posts$Views)
