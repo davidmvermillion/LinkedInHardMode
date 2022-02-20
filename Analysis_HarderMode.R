@@ -33,7 +33,10 @@ theme_generic <- function(base_size = 12,
       axis.text = element_text(size = 12, color = "grey60"),
       axis.line = element_line(color = "grey60"),
       axis.ticks = element_line(color = "grey60"),
-      plot.title = element_text(hjust = 0.5, size = 40, color = "grey40"),
+      plot.title = element_text(hjust = 0.5, size = 40, color = "grey40",
+                                margin =
+                                  margin(t = 0, r = 0, b = 10, l = 0,
+                                         unit = "pt")),
       panel.grid = element_blank(),
       plot.subtitle = element_text(hjust = 0.5, size = 20, color = "grey40",
                                    margin =
@@ -423,6 +426,7 @@ posts %>% filter(Day > 0) %>%
 
 # Histogram Comparisons ----
 
+# Views
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 100) %>%
   filter(Views < 5000) %>% 
@@ -431,10 +435,92 @@ posts %>% filter(Day > 0) %>%
 ) +
   geom_histogram(bins = 15, color = "#e34234", fill = "#f4b3ae") +
   theme_generic() +
-  labs(title = TeX("Posts Usually Receive $\\approx$ 1,000 Views"),
-       subtitle = "15 bins",
+  labs(title = TeX("Posts Usually Receive ~ 1,000 Views"),
        x = "Views",
        y = "Count/\nBin")
+
+# Comments
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>%
+  filter(Comments < 50) %>% 
+  ggplot(
+    aes(x = Comments)
+  ) +
+  geom_histogram(bins = 10, color = "#e34234", fill = "#f4b3ae") +
+  theme_generic() +
+  labs(title = TeX("Posts Usually Receive $\\approx$ 10 Comments"),
+       x = "Comments",
+       y = "Count/\nBin")
+
+# Reactions
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>%
+  filter(Reactions < 50) %>% 
+  ggplot(
+    aes(x = Reactions)
+  ) +
+  geom_histogram(bins = 10, color = "#e34234", fill = "#f4b3ae") +
+  theme_generic() +
+  labs(title = TeX("Posts Usually Receive $\\approx$ 10 Reactions"),
+       x = "Reactions",
+       y = "Count/\nBin")
+
+# Reactions
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>%
+  # filter(Reactions < 50) %>% 
+  ggplot(
+    aes(x = Category, stat = "count")
+  ) +
+  geom_histogram(bins = 10, color = "#e34234", fill = "#f4b3ae") +
+  theme_generic() +
+  labs(title = TeX("Posts Usually Receive $\\approx$ 10 Reactions"),
+       x = "Reactions",
+       y = "Count/\nBin")
+
+
+# Bar Graphs ----
+# Compare median view counts on posts by category, type, and day
+
+# Category
+cc %>% 
+  ggplot(
+  aes(x = reorder(catlist, -CategoriesCompared), y = CategoriesCompared)
+) +
+  geom_bar(stat = 'identity', fill = "#f4b3ae") +
+  coord_flip() +
+  theme_generic() +
+  ggtitle("Category Views\nNot Evenly Distributed") +
+  labs(y = ("Median Views"),
+       x = ("Post\nCategories")) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
+
+t2 <- tt %>% 
+  filter(typelist == "Photo_1")
+t3 <- tt %>% 
+  filter(typelist == "Document")
+typehighlight <- bind_rows(t2, t3)
+
+
+# Type
+tt %>% 
+  ggplot(
+    aes(x = reorder(typelist, -TypeCompared), y = TypeCompared)
+  ) +
+  geom_bar(stat = 'identity', fill = "#f4b3ae") +
+  geom_bar(data = typehighlight,
+             aes(x = reorder(typelist, -TypeCompared), y = TypeCompared),
+             stat = "identity", fill = "#E34234") +
+  coord_flip() +
+  theme_generic() +
+  ggtitle("Documents and Single Photos\nPerform Well") +
+  labs(y = ("Median Views"),
+       x = ("Post\nTypes")) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
 
 
 plot(posts$Views)
