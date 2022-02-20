@@ -203,7 +203,7 @@ CUSSFExplained <- posts %>%
 
 catlist <- (unique(posts$Category))
 
-# More work needed to streamline this process
+# More work needed to streamline this process. for loop better, but not sure how to implement
 # This is for the entire data set
 CategoriesCompared <- (c(median(CSpaceForce$Views), median(CCyberSecurity$Views),
                                   median(CCelebration$Views), median(CUpdate$Views), median(CSpaceNews$Views),
@@ -224,6 +224,7 @@ dud3c <- cc %>%
   arrange(desc(CategoriesCompared)) %>% 
   slice_tail(n = 3)
 
+
 # Type --------------------------------------------------------------
 
 typelist <- (unique(posts$Type))
@@ -243,14 +244,14 @@ TPhoto_2 <- posts %>%
 TPhoto_3 <- posts %>%
   filter(Type == "Photo_3")
 
+TPhoto_5 <- posts %>%
+  filter(Type == "Photo_5")
+
 TText <- posts %>%
   filter(Type == "Text")
 
 TShare <- posts %>%
   filter(Type == "Share")
-
-TLink <- posts %>%
-  filter(Type == "Link")
 
 TPoll <- posts %>%
   filter(Type == "Poll")
@@ -259,13 +260,38 @@ TVideo <- posts %>%
   filter(Type == "Video")
 
 TypeCompared <- c(
-  
+  median(TShare$Views), median(TPhoto_1$Views), median(TPhoto_5$Views), 
+  median(TText$Views),  median(TPhoto_3$Views), median(TDocument$Views), 
+  median(TLink$Views), median(TPoll$Views), median(TPhoto_2$Views), 
+  median(TVideo$Views)
 )
+
+tt <- as_tibble(cbind(typelist, TypeCompared))
+tt$TypeCompared <- as.numeric(tt$TypeCompared)
+tt$typelist <- as.character(tt$typelist)
+
+# Total top 3
+top3t <- tt %>% 
+  arrange(desc(TypeCompared)) %>% 
+  slice_head(n = 3)
+
+# Top 3 ignoring two wild ones
+top3tnorm <- tt %>% 
+  arrange(desc(TypeCompared)) %>% 
+  filter(typelist != c("Photo_5", "Poll")) %>% 
+  slice_head(n = 3)
+
+dud3t <- tt %>% 
+  arrange(desc(TypeCompared)) %>% 
+  filter(typelist != "Video") %>% 
+  slice_tail(n = 3)
 
 # Still need to compare types and categories
 
 
 # Visuals -----------------------------------------------------------------
+
+# Comparisons in categories
 
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 100) %>% 
@@ -296,6 +322,8 @@ posts %>% filter(Day > 0) %>%
   geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
   theme_generic() +
   ggtitle("Comments per Post Show\nSteady Increase")
+
+# Comparisons in Types
 
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 100) %>% 
