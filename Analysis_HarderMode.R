@@ -1,6 +1,7 @@
 # Code to analyze #LinkedInHarderMode results
 
 library(tidyverse)
+library(scales)
 
 # Import ----
 posts <- read.csv("LinkedInPostPerformancesDay108.csv", fileEncoding = "UTF-8-BOM")
@@ -23,26 +24,22 @@ theme_generic <- function(base_size = 12,
                 base_family = base_family,
                 base_line_size = base_line_size) %+replace%
     theme(
-      axis.title.y = element_text(angle = 0, 
-                                  vjust = 0, 
-                                  hjust = 0.5, 
-                                  size = 15, 
-                                  color = "grey55"),
-      axis.title.x = element_text(hjust = 0, 
-                                  size = 15, 
-                                  color = "grey55"),
-      axis.text = element_text(size = 12, 
-                               color = "grey60"),
+      axis.title.y = element_text(angle = 0, vjust = 0, hjust = 0.5, size = 15,
+                                  color = "grey55", margin =
+                                    margin(t = 0, r = 7, b = 0, l = 0,
+                                           unit = "pt")),
+      axis.title.x = element_text(hjust = 0, size = 15, color = "grey55"),
+      axis.text = element_text(size = 12, color = "grey60"),
       axis.line = element_line(color = "grey60"),
       axis.ticks = element_line(color = "grey60"),
-      plot.title = element_text(hjust = 0.5, 
-                                size = 40, 
-                                color = "grey40"), 
+      plot.title = element_text(hjust = 0.5, size = 40, color = "grey40"),
       panel.grid = element_blank(),
-      plot.subtitle = element_text(hjust = 0.5, 
-                                   size = 20, 
-                                   color = "grey55"),
-      
+      plot.subtitle = element_text(hjust = 0.5, size = 20, color = "grey40",
+                                   margin =
+                                     margin(t = 10, r = 0, b = 0, l = 0,
+                                            unit = "pt")),
+      legend.title = element_text(size = 15, color = "grey40"),
+      legend.text = element_text(size = 12, color = "grey30"),
       complete = TRUE
     )
 }
@@ -355,6 +352,34 @@ posts %>% filter(Day > 0) %>%
   theme_generic() +
   ggtitle("Comments per Post Show\nSteady Increase")
 
+
+# Engagement
+# Videos (top four in upper right quadrant) show high engagement
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  ggplot(aes(x = Date, y = Engagement)) +
+  geom_point(color = "#f4b3ae") +
+  geom_point(data = video,
+            aes(x = Date, y = Engagement),
+            color = "#E34234", size = 5) +
+  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  theme_generic() +
+  ggtitle("Video Engagement is Massive",
+          subtitle = "Compared to Other Content")
+
+# Polls have horrible engagement relative to views
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  ggplot(aes(x = Date, y = Engagement)) +
+  geom_point(color = "#f4b3ae") +
+  geom_point(data = TPoll,
+             aes(x = Date, y = Engagement),
+             color = "#E34234", size = 5) +
+  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  theme_generic() +
+  ggtitle("Poll Engagement is Terrible",
+          subtitle = "Compared to Other Content")
 
 
 
