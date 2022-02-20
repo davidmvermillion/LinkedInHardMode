@@ -2,6 +2,7 @@
 
 library(tidyverse)
 library(scales)
+library(latex2exp)
 
 # Import ----
 posts <- read.csv("LinkedInPostPerformancesDay108.csv", fileEncoding = "UTF-8-BOM")
@@ -217,6 +218,10 @@ top3c <- cc %>%
   arrange(desc(CategoriesCompared)) %>% 
   slice_head(n = 3)
 
+top5c <- cc %>% 
+  arrange(desc(CategoriesCompared)) %>% 
+  slice_head(n = 5)
+
 dud3c <- cc %>% 
   arrange(desc(CategoriesCompared)) %>% 
   slice_tail(n = 3)
@@ -296,7 +301,7 @@ posts %>% filter(Day > 0) %>%
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Reactions, color = Category)) +
   geom_point() +
-  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
   theme_generic() +
   ggtitle("Reactions per Post Show\nSteady Increase")
 
@@ -306,7 +311,7 @@ posts %>% filter(Day > 0) %>%
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Views, color = Category)) +
   geom_point() +
-  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
   theme_generic() +
   ggtitle("Views per Post Show\nSteady Increase")
 
@@ -316,7 +321,7 @@ posts %>% filter(Day > 0) %>%
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Comments, color = Category)) +
   geom_point() +
-  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
   theme_generic() +
   ggtitle("Comments per Post Show\nSteady Increase")
 
@@ -328,7 +333,7 @@ posts %>% filter(Day > 0) %>%
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Reactions, color = Type)) +
   geom_point() +
-  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
   theme_generic() +
   ggtitle("Reactions per Post Show\nSteady Increase")
 
@@ -338,7 +343,7 @@ posts %>% filter(Day > 0) %>%
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Views, color = Type)) +
   geom_point() +
-  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
   theme_generic() +
   ggtitle("Views per Post Show\nSteady Increase")
 
@@ -348,7 +353,7 @@ posts %>% filter(Day > 0) %>%
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Comments, color = Type)) +
   geom_point() +
-  geom_smooth(method='lm', se=FALSE, color = "#E34234", size = 2) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
   theme_generic() +
   ggtitle("Comments per Post Show\nSteady Increase")
 
@@ -357,7 +362,7 @@ posts %>% filter(Day > 0) %>%
 # Videos (top four in upper right quadrant) show high engagement
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 100) %>% 
-  filter(Type != "Poll") %>% 
+  # filter(Type != "Poll") %>% 
   ggplot(aes(x = Date, y = Engagement)) +
   geom_point(color = "#f4b3ae") +
   geom_point(data = video,
@@ -365,7 +370,7 @@ posts %>% filter(Day > 0) %>%
             color = "#E34234", size = 5) +
   scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
   theme_generic() +
-  ggtitle("Video Engagement is Massive",
+  ggtitle("Video Engagement is Incredible",
           subtitle = "Compared to Other Content")
 
 # Polls have horrible engagement relative to views
@@ -381,6 +386,55 @@ posts %>% filter(Day > 0) %>%
   ggtitle("Poll Engagement is Terrible",
           subtitle = "Compared to Other Content")
 
+# Views, Reactions, and Comments
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Comments)) +
+  geom_point(color = "#f4b3ae") +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
+  theme_generic() +
+  ggtitle("Comments per Post Show\nSteady Increase",
+          subtitle = "Ignoring Polls and Videos")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Views)) +
+  geom_point(color = "#f4b3ae") +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
+  theme_generic() +
+  ggtitle("Views per Post Show\nSteady Increase",
+          subtitle = "Ignoring Polls and Videos")
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>% 
+  filter(Type != "Poll") %>% 
+  filter(Type != "Video") %>% 
+  ggplot(aes(x = Date, y = Reactions)) +
+  geom_point(color = "#f4b3ae") +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
+  theme_generic() +
+  ggtitle("Reactions per Post Show\nSteady Increase",
+          subtitle = "Ignoring Polls and Videos")
+
+# Histogram Comparisons ----
+
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 100) %>%
+  filter(Views < 5000) %>% 
+  ggplot(
+  aes(x = Views)
+) +
+  geom_histogram(bins = 15, color = "#e34234", fill = "#f4b3ae") +
+  theme_generic() +
+  labs(title = TeX("Posts Usually Receive $\\approx$ 1,000 Views"),
+       subtitle = "15 bins",
+       x = "Views",
+       y = "Count/\nBin")
 
 
 plot(posts$Views)
