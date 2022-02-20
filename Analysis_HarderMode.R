@@ -145,6 +145,14 @@ Saturday <- posts %>% filter(WeekdayNumber == 7) %>%
   filter(Type != "Video") %>% 
   select(-Votes)
 
+Weekdays <- c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
+              "Saturday")
+weekcalc <- c(median(Sunday$Views), median(Monday$Views), median(Tuesday$Views),
+               median(Wednesday$Views), median(Thursday$Views), median(Friday$Views),
+               median(Saturday$Views))
+
+Weeks <- as_tibble(cbind(Weekdays, weekcalc))
+Weeks$weekcalc <- as.numeric(Weeks$weekcalc)
 
 # Categories --------------------------------------------------------------
 
@@ -522,5 +530,28 @@ tt %>%
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
 
+d2 <- Weeks %>% 
+  filter(Weekdays == "Thursday")
+d3 <- Weeks %>% 
+  filter(Weekdays == "Sunday")
+dayhighlight <- bind_rows(d2, d3)
+
+# Days
+Weeks %>% 
+  ggplot(
+    aes(x = reorder(Weekdays, -weekcalc), y = weekcalc)
+  ) +
+  geom_bar(stat = 'identity', fill = "#f4b3ae") +
+  geom_bar(data = dayhighlight,
+           aes(x = reorder(Weekdays, -weekcalc), y = weekcalc),
+           stat = "identity", fill = "#E34234") +
+  coord_flip() +
+  theme_generic() +
+  ggtitle("Sundays and Thursdays\nPerform Best") +
+  labs(y = ("Median Views"),
+       x = ("Post\nDays")) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
 
 plot(posts$Views)
