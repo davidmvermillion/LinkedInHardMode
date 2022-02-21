@@ -432,6 +432,24 @@ posts %>% filter(Day > 0) %>%
   ggtitle("Reactions per Post Show\nSteady Increase",
           subtitle = "Ignoring Polls and Videos")
 
+# Profile Views During #LinkedInHarderMode Challenge
+pchal <- profileviews %>% 
+  filter(Weekof < "2022-02-03") %>% 
+  filter(Weekof > "2022-01-03")
+
+# Profile Views
+profileviews %>% 
+  filter(Weekof < "2022-02-03") %>% 
+  ggplot(aes(x = Weekof, y = ProfileViews)) +
+  geom_line(color = "grey40", size = 1, linetype = 2) +
+  geom_point(data = pchal,
+             aes(x = Weekof, y = ProfileViews), size = 4, color = "#E34234") +
+  theme_generic() +
+  ggtitle("Profile Views\nHighest During Challenge",
+          subtitle = "Regular Posting Increased Profile Views") +
+  labs(y = "Profile\nViews", x = element_blank())
+
+
 # Histogram Comparisons ----
 
 # Views
