@@ -8,3 +8,6 @@ I'll redo this in Tableau.
 I'll then look in Excel to do the same thing.
 
 Looking to practice with the three big tools I plan to build in.
+
+
+Data in ggplot with dates need to be formatted in YYYY-mm-dd or mm/dd/YYYY format for import
