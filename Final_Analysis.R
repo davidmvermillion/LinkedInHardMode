@@ -406,7 +406,7 @@ posts %>% filter(Day > 0) %>%
   geom_point(data = video,
              aes(x = Date, y = Engagement),
              color = "#E3347D", size = 5) +
-  scale_y_continuous(labels = scales::percent_format(scale = 186, accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
   theme_generic() +
   ggtitle("Engagement Range Began Narrowing",
           subtitle = "Polls in Orange and Videos in Magenta")
