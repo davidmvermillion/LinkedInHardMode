@@ -548,7 +548,7 @@ ggsave("Types.svg", device = "svg", path = "Images/Final")
 ggsave("Types.jpeg", device = "jpeg", path = "Images/Final")
 
 d2 <- Weeks %>% 
-  filter(Weekdays == "Thursday")
+  filter(Weekdays == "Saturday")
 d3 <- Weeks %>% 
   filter(Weekdays == "Sunday")
 dayhighlight <- bind_rows(d2, d3)
@@ -564,11 +564,13 @@ Weeks %>%
            stat = "identity", fill = "#E34234") +
   coord_flip() +
   theme_generic() +
-  ggtitle("Sundays and Thursdays\nPerform Best") +
+  ggtitle("Saturdays and Sundays\nPerform Best") +
   labs(y = ("Median Views"),
        x = ("Post\nDays")) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
+ggsave("Days.svg", device = "svg", path = "Images/Final")
+ggsave("Days.jpeg", device = "jpeg", path = "Images/Final")
 
 plot(posts$Views)
