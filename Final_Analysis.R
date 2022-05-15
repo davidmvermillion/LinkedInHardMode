@@ -74,7 +74,7 @@ topperformers <- posts %>% filter(Views > as.integer(quantile(posts$Views, .66))
   select(-Votes) %>% 
   slice_head(n = 10)
 
-greater1000 <- posts %>% filter(Views > 1000) %>% 
+greater1860 <- posts %>% filter(Views > 1860) %>% 
   filter(Date >= "2022-01-03") %>% 
   filter(Date <= "2022-05-01") %>% 
   filter(Type != "Video") %>% 
@@ -97,45 +97,45 @@ video <- posts %>%
 
 Sunday <- posts %>% filter(WeekdayNumber == 1) %>% 
   filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Video") %>% 
   filter(Type != "Poll") %>% 
   select(-Votes)
 
 Monday <- posts %>% filter(WeekdayNumber == 2) %>% 
   filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Video") %>% 
   select(-Votes)
 
 Tuesday <- posts %>% filter(WeekdayNumber == 3) %>% 
   filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Video") %>% 
   filter(Type != "Poll") %>% 
   select(-Votes)
 
 Wednesday <- posts %>% filter(WeekdayNumber == 4) %>% 
   filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Video") %>% 
   select(-Votes)
 
 Thursday <- posts %>% filter(WeekdayNumber == 5) %>% 
   filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Video") %>% 
   select(-Votes)
 
 Friday <- posts %>% filter(WeekdayNumber == 6) %>% 
   filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Video") %>% 
   select(-Votes)
 
 Saturday <- posts %>% filter(WeekdayNumber == 7) %>% 
   filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Video") %>% 
   select(-Votes)
 
@@ -215,7 +215,7 @@ CategoriesCompared <- (c(median(CSpaceForce$Views), median(CCyberSecurity$Views)
                          median(CArtificial_Intelligence$Views), median(CDaysofTribute$Views), median(CPhilosophy$Views),
                          median(CLife$Views), median(CCoding$Views), median(CMath$Views)))
 
-cc <- as_tibble(cbind(catlist, CategoriesCompared))
+cc <- as_tibble(cbind(catlist, CategoriesCompared)) # Error here somewhere
 cc$CategoriesCompared <- as.numeric(cc$CategoriesCompared)
 cc$catlist <- as.character(cc$catlist)
 
@@ -273,7 +273,7 @@ TypeCompared <- c(
   median(TVideo$Views)
 )
 
-tt <- as_tibble(cbind(typelist, TypeCompared))
+tt <- as_tibble(cbind(typelist, TypeCompared)) # Error here
 tt$TypeCompared <- as.numeric(tt$TypeCompared)
 tt$typelist <- as.character(tt$typelist)
 
@@ -301,7 +301,7 @@ dud3t <- tt %>%
 # Comparisons in categories
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Reactions, color = Category)) +
@@ -311,7 +311,7 @@ posts %>% filter(Day > 0) %>%
   ggtitle("Reactions per Post Show\nSteady Increase")
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Views, color = Category)) +
@@ -321,7 +321,7 @@ posts %>% filter(Day > 0) %>%
   ggtitle("Views per Post Show\nSteady Increase")
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Comments, color = Category)) +
@@ -333,7 +333,7 @@ posts %>% filter(Day > 0) %>%
 # Comparisons in Types
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Reactions, color = Type)) +
@@ -343,7 +343,7 @@ posts %>% filter(Day > 0) %>%
   ggtitle("Reactions per Post Show\nSteady Increase")
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Views, color = Type)) +
@@ -353,7 +353,7 @@ posts %>% filter(Day > 0) %>%
   ggtitle("Views per Post Show\nSteady Increase")
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Comments, color = Type)) +
@@ -366,27 +366,27 @@ posts %>% filter(Day > 0) %>%
 # Engagement
 # Videos (top four in upper right quadrant) show high engagement
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   # filter(Type != "Poll") %>% 
   ggplot(aes(x = Date, y = Engagement)) +
   geom_point(color = "#f4b3ae") +
   geom_point(data = video,
              aes(x = Date, y = Engagement),
              color = "#E34234", size = 5) +
-  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(scale = 186, accuracy = 1)) +
   theme_generic() +
   ggtitle("Video Engagement is Incredible",
           subtitle = "Compared to Other Content")
 
 # Polls have horrible engagement relative to views
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   ggplot(aes(x = Date, y = Engagement)) +
   geom_point(color = "#f4b3ae") +
   geom_point(data = TPoll,
              aes(x = Date, y = Engagement),
              color = "#E34234", size = 5) +
-  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(scale = 186, accuracy = 1)) +
   theme_generic() +
   ggtitle("Poll Engagement is Terrible",
           subtitle = "Compared to Other Content")
@@ -394,7 +394,7 @@ posts %>% filter(Day > 0) %>%
 # Views, Reactions, and Comments
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Comments)) +
@@ -405,7 +405,7 @@ posts %>% filter(Day > 0) %>%
           subtitle = "Ignoring Polls and Videos")
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Views)) +
@@ -416,7 +416,7 @@ posts %>% filter(Day > 0) %>%
           subtitle = "Ignoring Polls and Videos")
 
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>% 
+  filter(Day <= 186) %>% 
   filter(Type != "Poll") %>% 
   filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Reactions)) +
@@ -430,7 +430,7 @@ posts %>% filter(Day > 0) %>%
 
 # Views
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>%
+  filter(Day <= 186) %>%
   filter(Views < 5000) %>% 
   ggplot(
     aes(x = Views)
@@ -443,7 +443,7 @@ posts %>% filter(Day > 0) %>%
 
 # Comments
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>%
+  filter(Day <= 186) %>%
   filter(Comments < 50) %>% 
   ggplot(
     aes(x = Comments)
@@ -456,7 +456,7 @@ posts %>% filter(Day > 0) %>%
 
 # Reactions
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>%
+  filter(Day <= 186) %>%
   filter(Reactions < 50) %>% 
   ggplot(
     aes(x = Reactions)
@@ -469,7 +469,7 @@ posts %>% filter(Day > 0) %>%
 
 # Reactions
 posts %>% filter(Day > 0) %>% 
-  filter(Day <= 100) %>%
+  filter(Day <= 186) %>%
   # filter(Reactions < 50) %>% 
   ggplot(
     aes(x = Category, stat = "count")
