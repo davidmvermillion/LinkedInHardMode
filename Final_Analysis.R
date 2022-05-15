@@ -391,6 +391,24 @@ posts %>% filter(Day > 0) %>%
   ggtitle("Poll Engagement is Terrible",
           subtitle = "Compared to Other Content")
 
+# Engagement channeling downward over last few months
+posts %>% filter(Day > 0) %>% 
+  filter(Day <= 186) %>% 
+  ggplot(aes(x = Date, y = Engagement)) +
+  geom_point(color = "#f4b3ae") +
+  geom_point(data = TPoll,
+             aes(x = Date, y = Engagement),
+             color = "#E39A34", size = 5) +
+  geom_point(data = video,
+             aes(x = Date, y = Engagement),
+             color = "#E3347D", size = 5) +
+  scale_y_continuous(labels = scales::percent_format(scale = 186, accuracy = 1)) +
+  theme_generic() +
+  ggtitle("Engagement Range Began Narrowing",
+          subtitle = "Polls in Orange and Videos in Magenta")
+ggsave("Engagement.svg", device = "svg", path = "Images/Final")
+ggsave("Engagement.jpeg", device = "jpeg", path = "Images/Final")
+
 # Views, Reactions, and Comments
 
 posts %>% filter(Day > 0) %>% 
