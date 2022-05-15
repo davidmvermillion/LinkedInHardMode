@@ -277,6 +277,10 @@ tt <- as_tibble(cbind(typelist, TypeCompared)) # Error here
 tt$TypeCompared <- as.numeric(tt$TypeCompared)
 tt$typelist <- as.character(tt$typelist)
 
+April <- posts %>% 
+  filter(Date >= "2022-04-01") %>% 
+  filter(Date <= "2022-05-01")
+
 # Total top 3
 top3t <- tt %>% 
   arrange(desc(TypeCompared)) %>% 
@@ -413,36 +417,36 @@ ggsave("Engagement.jpeg", device = "jpeg", path = "Images/Final")
 
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 186) %>% 
-  filter(Type != "Poll") %>% 
-  filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Comments)) +
   geom_point(color = "#f4b3ae") +
-  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 1.5) +
   theme_generic() +
-  ggtitle("Comments per Post Show\nSteady Increase",
-          subtitle = "Ignoring Polls and Videos")
+  ggtitle("Comments per Post Show\nSteady Increase")
+ggsave("Comments.svg", device = "svg", path = "Images/Final")
+ggsave("Comments.jpeg", device = "jpeg", path = "Images/Final")
 
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 186) %>% 
-  filter(Type != "Poll") %>% 
-  filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Views)) +
-  geom_point(color = "#f4b3ae") +
-  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
+  geom_point(color = "#f4b3ae", size = 1.5) +
+  geom_point(data = April,
+             aes(x = Date, y = Views),
+             color = "#E39A34", size = 5) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 1.5) +
   theme_generic() +
-  ggtitle("Views per Post Show\nSteady Increase",
-          subtitle = "Ignoring Polls and Videos")
+  ggtitle("Views Stopped Increasing in April")
+ggsave("Views.svg", device = "svg", path = "Images/Final")
+ggsave("Views.jpeg", device = "jpeg", path = "Images/Final")
 
 posts %>% filter(Day > 0) %>% 
   filter(Day <= 186) %>% 
-  filter(Type != "Poll") %>% 
-  filter(Type != "Video") %>% 
   ggplot(aes(x = Date, y = Reactions)) +
   geom_point(color = "#f4b3ae") +
-  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 2) +
+  geom_smooth(method='lm', se=FALSE, color = "#E3347D", size = 1.5) +
   theme_generic() +
-  ggtitle("Reactions per Post Show\nSteady Increase",
-          subtitle = "Ignoring Polls and Videos")
+  ggtitle("Reactions per Post Show\nSteady Increase")
+ggsave("Reactions.svg", device = "svg", path = "Images/Final")
+ggsave("Reactions.jpeg", device = "jpeg", path = "Images/Final")
 
 # Histogram Comparisons ----
 
@@ -454,10 +458,16 @@ posts %>% filter(Day > 0) %>%
     aes(x = Views)
   ) +
   geom_histogram(bins = 15, color = "#e34234", fill = "#f4b3ae") +
+  geom_vline(aes(xintercept = median(posts$Views)), color = "#e95d97", size = 1.75) +
+  geom_text(aes(median(posts$Views), 33, 
+                label = paste0("Median = ", round(median(posts$Views), digits = 0)), 
+                hjust = - 0.125), color = "#e95d97", size = 7) +
   theme_generic() +
   labs(title = TeX("Posts Usually Receive ~ 1,000 Views"),
        x = "Views",
        y = "Count/\nBin")
+ggsave("ViewHist.svg", device = "svg", path = "Images/Final")
+ggsave("ViewHist.jpeg", device = "jpeg", path = "Images/Final")
 
 # Comments
 posts %>% filter(Day > 0) %>% 
@@ -471,6 +481,8 @@ posts %>% filter(Day > 0) %>%
   labs(title = TeX("Posts Usually Receive $\\approx$ 10 Comments"),
        x = "Comments",
        y = "Count/\nBin")
+ggsave("CommentHist.svg", device = "svg", path = "Images/Final")
+ggsave("CommentHist.jpeg", device = "jpeg", path = "Images/Final")
 
 # Reactions
 posts %>% filter(Day > 0) %>% 
@@ -484,19 +496,8 @@ posts %>% filter(Day > 0) %>%
   labs(title = TeX("Posts Usually Receive $\\approx$ 10 Reactions"),
        x = "Reactions",
        y = "Count/\nBin")
-
-# Reactions
-posts %>% filter(Day > 0) %>% 
-  filter(Day <= 186) %>%
-  # filter(Reactions < 50) %>% 
-  ggplot(
-    aes(x = Category, stat = "count")
-  ) +
-  geom_histogram(bins = 10, color = "#e34234", fill = "#f4b3ae") +
-  theme_generic() +
-  labs(title = TeX("Posts Usually Receive $\\approx$ 10 Reactions"),
-       x = "Reactions",
-       y = "Count/\nBin")
+ggsave("ReactionHist.svg", device = "svg", path = "Images/Final")
+ggsave("ReactionHist.jpeg", device = "jpeg", path = "Images/Final")
 
 
 # Bar Graphs ----
@@ -518,7 +519,7 @@ cc %>%
                  unit = "pt"))
 
 t2 <- tt %>% 
-  filter(typelist == "Photo_1")
+  filter(typelist == "Video")
 t3 <- tt %>% 
   filter(typelist == "Document")
 typehighlight <- bind_rows(t2, t3)
@@ -526,6 +527,8 @@ typehighlight <- bind_rows(t2, t3)
 
 # Type
 tt %>% 
+  filter(typelist != "Poll") %>% 
+  filter(typelist != "Photo_5") %>% 
   ggplot(
     aes(x = reorder(typelist, -TypeCompared), y = TypeCompared)
   ) +
@@ -535,12 +538,14 @@ tt %>%
            stat = "identity", fill = "#E34234") +
   coord_flip() +
   theme_generic() +
-  ggtitle("Documents and Single Photos\nPerform Well") +
+  ggtitle("Documents and Videos Perform Well") +
   labs(y = ("Median Views"),
        x = ("Post\nTypes")) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
+ggsave("Types.svg", device = "svg", path = "Images/Final")
+ggsave("Types.jpeg", device = "jpeg", path = "Images/Final")
 
 d2 <- Weeks %>% 
   filter(Weekdays == "Thursday")
