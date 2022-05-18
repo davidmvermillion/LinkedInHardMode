@@ -575,4 +575,21 @@ Weeks %>%
 ggsave("Days.svg", device = "svg", path = "Images/Final")
 ggsave("Days.jpeg", device = "jpeg", path = "Images/Final")
 
+# Violin Charts ----
+
+posts %>% 
+  filter(is.na(Month) == F) %>% 
+  ggplot(
+    aes(x = factor(Month), y = Engagement)
+  ) +
+  geom_boxplot() +
+  # coord_flip() +
+  theme_generic() +
+  ggtitle("Saturdays and Sundays\nPerform Best") +
+  labs(y = ("Median Views"),
+       x = ("Post\nDays")) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
+
 plot(posts$Views)
