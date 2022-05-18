@@ -13,6 +13,12 @@ posts$Date <- as.Date(posts$Date)
 posts$Engagement <- (posts$Reactions + posts$Comments)/posts$Views
 posts$Month <- month(posts$Date)
 
+# https://statisticsglobe.com/replace-values-in-data-frame-conditionally-in-r
+posts$Month[posts$Month == 1] <- "22_1"
+posts$Month[posts$Month == 2] <- "22_2"
+posts$Month[posts$Month == 3] <- "22_3"
+posts$Month[posts$Month == 4] <- "22_4"
+
 # ggplot Theme ----
 theme_generic <- function(base_size = 12,
                           base_family = "",
@@ -583,11 +589,11 @@ posts %>%
     aes(x = factor(Month), y = Engagement)
   ) +
   geom_boxplot() +
-  # coord_flip() +
   theme_generic() +
-  ggtitle("Saturdays and Sundays\nPerform Best") +
-  labs(y = ("Median Views"),
-       x = ("Post\nDays")) +
+  ggtitle("April's Median Engagement Increased") +
+  labs(y = ("Median\nEngagement"),
+       x = ("Months")) +
+  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
