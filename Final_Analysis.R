@@ -3,6 +3,7 @@
 library(tidyverse)
 library(scales)
 library(latex2exp)
+library(lubridate)
 
 # Import ----
 posts <- read.csv("LinkedInPostPerformancesDay186.csv", fileEncoding = "UTF-8-BOM")
@@ -10,6 +11,7 @@ posts <- read.csv("LinkedInPostPerformancesDay186.csv", fileEncoding = "UTF-8-BO
 # Format ----
 posts$Date <- as.Date(posts$Date)
 posts$Engagement <- (posts$Reactions + posts$Comments)/posts$Views
+posts$Month <- month(posts$Date)
 
 # ggplot Theme ----
 theme_generic <- function(base_size = 12,
