@@ -583,6 +583,40 @@ ggsave("Days.jpeg", device = "jpeg", path = "Images/Final")
 
 # Violin Charts ----
 
+# Engagement
+posts %>% 
+  filter(is.na(Month) == F) %>% 
+  ggplot(
+    aes(x = factor(Month), y = Engagement)
+  ) +
+  geom_violin() +
+  theme_generic() +
+  ggtitle("April's Median Engagement Increased") +
+  labs(y = ("Median\nEngagement"),
+       x = ("Months")) +
+  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
+
+# Views
+posts %>% 
+  filter(is.na(Month) == F) %>% 
+  ggplot(
+    aes(x = factor(Month), y = Views)
+  ) +
+  geom_violin() +
+  theme_generic() +
+  ggtitle("April's Median Views Decreased") +
+  labs(y = ("Median\nViews"),
+       x = ("Months")) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
+
+# Box Plots ----
+
+# Engagement
 posts %>% 
   filter(is.na(Month) == F) %>% 
   ggplot(
@@ -594,6 +628,21 @@ posts %>%
   labs(y = ("Median\nEngagement"),
        x = ("Months")) +
   scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
+
+# Views
+posts %>% 
+  filter(is.na(Month) == F) %>% 
+  ggplot(
+    aes(x = factor(Month), y = Views)
+  ) +
+  geom_boxplot() +
+  theme_generic() +
+  ggtitle("April's Median Views Decreased") +
+  labs(y = ("Median\nViews"),
+       x = ("Months")) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
