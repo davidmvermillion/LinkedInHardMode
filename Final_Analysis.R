@@ -605,6 +605,8 @@ posts %>%
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
+ggsave("Engagement_Violin.svg", device = "svg", path = "Images/Final")
+ggsave("Engagement_Violin.jpeg", device = "jpeg", path = "Images/Final")
 
 # Views
 posts %>% 
@@ -623,6 +625,8 @@ posts %>%
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
+ggsave("Views_Violin.svg", device = "svg", path = "Images/Final")
+ggsave("Views_Violin.jpeg", device = "jpeg", path = "Images/Final")
 
 # Box Plots ----
 
@@ -642,6 +646,8 @@ posts %>%
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
+ggsave("Engagement_Box.svg", device = "svg", path = "Images/Final")
+ggsave("Engagement_Box.jpeg", device = "jpeg", path = "Images/Final")
 
 # Views
 posts %>% 
@@ -658,5 +664,5 @@ posts %>%
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
-
-plot(posts$Views)
+ggsave("Views_Box.svg", device = "svg", path = "Images/Final")
+ggsave("Views_Box.jpeg", device = "jpeg", path = "Images/Final")
