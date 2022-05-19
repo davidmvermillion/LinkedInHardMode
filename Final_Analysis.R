@@ -585,13 +585,17 @@ ggsave("Days.jpeg", device = "jpeg", path = "Images/Final")
 
 xaxis <- c("Oct 21", "Nov 21", "Dec 21", "Jan 22", "Feb 22", "Mar 22", "Apr 22")
 
+# https://r-charts.com/distribution/violin-plot-mean-ggplot2/
+
 # Engagement
 posts %>% 
   filter(is.na(Month) == F) %>% 
   ggplot(
     aes(x = factor(Month), y = Engagement)
   ) +
-  geom_violin() +
+  geom_violin(fill = "#f4b3ae", linetype = "blank", draw_quantiles = 0.5) +
+  stat_summary(fun = median, fun.min = median, fun.max = median,
+               geom = "crossbar", width = 0.35, color = "#E34234", size = 1.1) +
   theme_generic() +
   ggtitle("April's Median Engagement Increased") +
   labs(y = ("Median\nEngagement"),
@@ -608,7 +612,9 @@ posts %>%
   ggplot(
     aes(x = factor(Month), y = Views)
   ) +
-  geom_violin() +
+  geom_violin(fill = "#f4b3ae", linetype = "blank", draw_quantiles = 0.5) +
+  stat_summary(fun = median, fun.min = median, fun.max = median,
+               geom = "crossbar", width = 0.35, color = "#E34234", size = 1.1) +
   theme_generic() +
   ggtitle("April's Median Views Decreased") +
   labs(y = ("Median\nViews"),
@@ -626,7 +632,7 @@ posts %>%
   ggplot(
     aes(x = factor(Month), y = Engagement)
   ) +
-  geom_boxplot() +
+  geom_boxplot(fill = "#f4b3ae", color = "#E34234") +
   theme_generic() +
   ggtitle("April's Median Engagement Increased") +
   labs(y = ("Median\nEngagement"),
@@ -643,7 +649,7 @@ posts %>%
   ggplot(
     aes(x = factor(Month), y = Views)
   ) +
-  geom_boxplot() +
+  geom_boxplot(fill = "#f4b3ae", color = "#E34234") +
   theme_generic() +
   ggtitle("April's Median Views Decreased") +
   labs(y = ("Median\nViews"),
