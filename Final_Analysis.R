@@ -583,6 +583,8 @@ ggsave("Days.jpeg", device = "jpeg", path = "Images/Final")
 
 # Violin Charts ----
 
+xaxis <- c("Oct 21", "Nov 21", "Dec 21", "Jan 22", "Feb 22", "Mar 22", "Apr 22")
+
 # Engagement
 posts %>% 
   filter(is.na(Month) == F) %>% 
@@ -595,6 +597,7 @@ posts %>%
   labs(y = ("Median\nEngagement"),
        x = ("Months")) +
   scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  scale_x_discrete(labels = xaxis) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
@@ -610,6 +613,7 @@ posts %>%
   ggtitle("April's Median Views Decreased") +
   labs(y = ("Median\nViews"),
        x = ("Months")) +
+  scale_x_discrete(labels = xaxis) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
@@ -628,6 +632,7 @@ posts %>%
   labs(y = ("Median\nEngagement"),
        x = ("Months")) +
   scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  scale_x_discrete(labels = xaxis) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
@@ -643,6 +648,7 @@ posts %>%
   ggtitle("April's Median Views Decreased") +
   labs(y = ("Median\nViews"),
        x = ("Months")) +
+  scale_x_discrete(labels = xaxis) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
