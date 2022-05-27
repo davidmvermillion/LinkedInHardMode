@@ -101,6 +101,13 @@ video <- posts %>%
   filter(Type == "Video") %>% 
   select(-Votes)
 
+# Monthly Medians
+# https://drsimonj.svbtle.com/plotting-individual-observations-and-group-means-with-ggplot2
+mm <- posts %>% 
+  group_by(Month) %>% 
+  summarize(Engagment = median(Engagement)) %>% 
+  filter(is.na(Month) == F)
+
 # Weekday comparisons ----
 
 Sunday <- posts %>% filter(WeekdayNumber == 1) %>% 
