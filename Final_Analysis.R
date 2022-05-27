@@ -103,10 +103,24 @@ video <- posts %>%
 
 # Monthly Medians
 # https://drsimonj.svbtle.com/plotting-individual-observations-and-group-means-with-ggplot2
+# Engagement
 mm <- posts %>% 
   group_by(Month) %>% 
-  summarize(Engagment = median(Engagement)) %>% 
+  summarize(Engagement = median(Engagement)) %>% 
   filter(is.na(Month) == F)
+
+# Views
+mm2 <- posts %>% 
+  group_by(Month) %>% 
+  summarize(Views = median(Views)) %>% 
+  filter(is.na(Month) == F)
+
+# Merge and delete
+mm$Views <- mm2$Views
+rm(mm2)
+
+# Highlight
+mmh <- tail(mm, n = 1)
 
 # Weekday comparisons ----
 
@@ -673,3 +687,32 @@ posts %>%
                  unit = "pt"))
 ggsave("Views_Box.svg", device = "svg", path = "Images/Final")
 ggsave("Views_Box.jpeg", device = "jpeg", path = "Images/Final")
+
+
+# Engagement Line
+mm %>% 
+  ggplot(
+    aes(x = factor(Month), y = Engagement)
+  ) +
+  # geom_boxplot(fill = "#f4b3ae", color = "#E34234") +
+  # geom_step(group = 1) +
+  geom_line(group = 1, size = 1.5, color = "#f9d9d6") +
+  geom_point(size = 3.5, color = "#eb7b71") +
+  geom_point(data = mmh,
+             aes(x = factor(Month), y = Engagement),
+             color = "#E34234", size = 5) +
+  geom_point(data = mmh,
+             aes(x = factor(Month), y = Engagement),
+             color = "#E34234", size = 25, shape = 22, stroke = 3) +
+  # geom_smooth(method = "lm") +
+  theme_generic() +
+  ggtitle("April's Median Engagement Increased") +
+  labs(y = ("Median\nViews"),
+       x = ("Months")) +
+  scale_x_discrete(labels = xaxis) +
+  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
+ggsave("Engagement_Line.svg", device = "svg", path = "Images/Final")
+ggsave("Engagement_Line.jpeg", device = "jpeg", path = "Images/Final")
