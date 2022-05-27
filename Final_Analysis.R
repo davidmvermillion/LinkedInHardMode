@@ -716,3 +716,30 @@ mm %>%
                  unit = "pt"))
 ggsave("Engagement_Line.svg", device = "svg", path = "Images/Final")
 ggsave("Engagement_Line.jpeg", device = "jpeg", path = "Images/Final")
+
+# Views Line
+mm %>% 
+  ggplot(
+    aes(x = factor(Month), y = Views)
+  ) +
+  # geom_boxplot(fill = "#f4b3ae", color = "#E34234") +
+  # geom_step(group = 1) +
+  geom_line(group = 1, size = 1.5, color = "#f9d9d6") +
+  geom_point(size = 3.5, color = "#eb7b71") +
+  geom_point(data = mmh,
+             aes(x = factor(Month), y = Views),
+             color = "#E34234", size = 5) +
+  geom_point(data = mmh,
+             aes(x = factor(Month), y = Views),
+             color = "#E34234", size = 25, shape = 22, stroke = 3) +
+  # geom_smooth(method = "lm") +
+  theme_generic() +
+  ggtitle("April's Median Views Decreased") +
+  labs(y = ("Median\nViews"),
+       x = ("Months")) +
+  scale_x_discrete(labels = xaxis) +
+  theme(plot.margin =
+          margin(t = 10, r = 50, b = 10, l = 10,
+                 unit = "pt"))
+ggsave("Views_Line.svg", device = "svg", path = "Images/Final")
+ggsave("Views_Line.jpeg", device = "jpeg", path = "Images/Final")
