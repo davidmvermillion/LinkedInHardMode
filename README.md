@@ -3,7 +3,7 @@ This repository is forcused on analyzing my 186 #LinkedInHardMode post performan
 
 # How to Use This Repository
 
-The result of my most current work is available [here](https://github.com/davidmvermillion/LinkedInHardMode/blob/main/DailyStreakReview.pdf) and you can check out the source code [here](https://github.com/davidmvermillion/LinkedInHardMode/blob/main/Analysis_HarderMode.R). 
+The result of my most current work is available [here](https://github.com/davidmvermillion/LinkedInHardMode/blob/main/DailyStreakReview.pdf) and you can check out the source code [here](https://github.com/davidmvermillion/LinkedInHardMode/blob/main/Final_Analysis.R). 
 
 The post performance data files (CSVs) include performances current as of the number of days into daily posting as indicated in the file name. E.g. [LinkedInPostPerformancesDay117.csv](https://github.com/davidmvermillion/LinkedInHardMode/blob/main/LinkedInPostPerformancesDay117.csv) has historical performances with values current as of Day 117. 
 
