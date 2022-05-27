@@ -707,7 +707,7 @@ mm %>%
   # geom_smooth(method = "lm") +
   theme_generic() +
   ggtitle("April's Median Engagement Increased") +
-  labs(y = ("Median\nViews"),
+  labs(y = ("Median\nEngagement"),
        x = ("Months")) +
   scale_x_discrete(labels = xaxis) +
   scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
