@@ -710,7 +710,7 @@ mm %>%
   labs(y = ("Median\nEngagement"),
        x = ("Months")) +
   scale_x_discrete(labels = xaxis) +
-  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 1)) +
+  scale_y_continuous(labels = scales::percent_format(scale = 100, accuracy = 0.5)) +
   theme(plot.margin =
           margin(t = 10, r = 50, b = 10, l = 10,
                  unit = "pt"))
